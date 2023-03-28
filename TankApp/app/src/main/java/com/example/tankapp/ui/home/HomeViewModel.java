@@ -10,7 +10,7 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Kezdőlap");
+        mText.setValue("Ez az oldal fogja ábrázolni a járműveket");
     }
 
     public LiveData<String> getText() {

@@ -10,7 +10,7 @@ public class GalleryViewModel extends ViewModel {
 
     public GalleryViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Összes tankolás");
+        mText.setValue("Ez az oldal fogja ábrázolni a tankolásokat");
     }
 
     public LiveData<String> getText() {

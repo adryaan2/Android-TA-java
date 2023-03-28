@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         setSupportActionBar(binding.appBarMain.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -45,8 +46,36 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        deleteDatabase("TankolasKonyvelesekDb");
+
         TankolasKonyvelesekDb = new DatabaseHelper(this);
+
+
+        TankolasKonyvelesekDb.addAutok("ABC-123");
+        TankolasKonyvelesekDb.addAutok("DEF-456");
+
+
+        TankolasKonyvelesekDb.addValutak("HUF");
+        TankolasKonyvelesekDb.addValutak("USD");
+
+        TankolasKonyvelesekDb.addUrmertekek("liter");
+        TankolasKonyvelesekDb.addUrmertekek("gallon");
+
+        TankolasKonyvelesekDb.addTavolsagok("méter");
+        TankolasKonyvelesekDb.addTavolsagok("mérföld");
+
+        TankolasKonyvelesekDb.addUzemanyagok("benzin");
+        TankolasKonyvelesekDb.addUzemanyagok("diesel");
+
+        TankolasKonyvelesekDb.addTankolasok("2023.03.26", 1, 350, 1, 2560, 1, 27,2, 1);
+        TankolasKonyvelesekDb.addTankolasok("2023.04.13", 2, 150, 2, 20, 2, 23,1, 1);
+        TankolasKonyvelesekDb.addTankolasok("2023.04.23", 2, 276, 1, 2000, 1, 18,1, 1);
+        TankolasKonyvelesekDb.addTankolasok("2023.05.17", 1, 220, 2, 50, 2, 10,2, 2);
+
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
