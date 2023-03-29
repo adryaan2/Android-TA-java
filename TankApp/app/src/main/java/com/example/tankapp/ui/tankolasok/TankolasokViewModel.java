@@ -6,14 +6,15 @@ import androidx.lifecycle.ViewModel;
 
 public class TankolasokViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<TestModel> mModel;
 
     public TankolasokViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Ez az oldal fogja ábrázolni a tankolásokat");
+        mModel = new MutableLiveData<>();
+        //mText.setValue("Ez az oldal fogja ábrázolni a tankolásokat");
     }
 
-    public LiveData<String> getText() {
-        return mText;
+
+    public LiveData<TestModel> getItem() {
+        return mModel;
     }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+
+    <TextView
+        android:id="@+id/datumTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="9.8"
+        android:gravity="center_horizontal|top"
+        android:text="2023.03.29"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tavTxt"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|top"
+        android:text="314 km" />
+
+    <TextView
+        android:id="@+id/egysegarTxt"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|top"
+        android:text="627,30 Ft/l" />
+
+    <TextView
+        android:id="@+id/mennyTxt"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|top"
+        android:text="25,41 l" />
+
+    <TextView
+        android:id="@+id/uanyag_tipusTxt"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="start|center_vertical"
+        android:text="Benzin 95" />
+</LinearLayout>
