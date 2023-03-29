@@ -11,4 +11,6 @@
     <string name="menu_gas_station">Tankolások</string>
     <string name="menu_chart">Statisztikák</string>
     <string name="menu_import_export">Import/Export</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
