@@ -1,4 +1,4 @@
-package com.example.tankapp.ui.slideshow;
+package com.example.tankapp.ui.stats;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tankapp.databinding.FragmentSlideshowBinding;
+import com.example.tankapp.databinding.FragmentStatsBinding;
 
-public class SlideshowFragment extends Fragment {
+public class StatsFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentStatsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        StatsViewModel statsViewModel =
+                new ViewModelProvider(this).get(StatsViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentStatsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        statsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

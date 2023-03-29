@@ -1,14 +1,14 @@
-package com.example.tankapp.ui.home;
+package com.example.tankapp.ui.jarmuvek;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class JarmuvekViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public JarmuvekViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Ez az oldal fogja ábrázolni a járműveket");
     }
