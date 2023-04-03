@@ -3,22 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_kezdo">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.tankapp.ui.home.HomeFragment"
+        android:id="@+id/nav_kezdo"
+        android:name="com.example.tankapp.ui.kezdo.KezdoFragment"
+        android:label="Kezdőlap"
+        tools:layout="@layout/fragment_kezdo" />
+
+    <fragment
+        android:id="@+id/nav_jarmuvek"
+        android:name="com.example.tankapp.ui.jarmuvek.JarmuvekFragment"
         android:label="@string/menu_car"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_jarmuvek" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.tankapp.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_tankolasok"
+        android:name="com.example.tankapp.ui.tankolasok.TankolasokFragment"
         android:label="@string/menu_gas_station"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_tankolasok" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.tankapp.ui.slideshow.SlideshowFragment"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_stats"
+        android:name="com.example.tankapp.ui.stats.StatsFragment"
+        tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/nav_importExport"
+        android:name="com.example.tankapp.ui.imp_exp.ImpExpFragment"
+        android:label="Import/Export"
+        tools:layout="@layout/fragment_imp_exp" />
 </navigation>

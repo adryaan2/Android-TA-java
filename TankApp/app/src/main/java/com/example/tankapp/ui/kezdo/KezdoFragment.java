@@ -1,4 +1,4 @@
-package com.example.tankapp.ui.slideshow;
+package com.example.tankapp.ui.kezdo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tankapp.databinding.FragmentSlideshowBinding;
+import com.example.tankapp.databinding.FragmentKezdoBinding;
 
-public class SlideshowFragment extends Fragment {
-
-    private FragmentSlideshowBinding binding;
+public class KezdoFragment extends Fragment{
+    private FragmentKezdoBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        KezdoViewModel kezdoViewModel =
+                new ViewModelProvider(this).get(KezdoViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentKezdoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textHome;
+        kezdoViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

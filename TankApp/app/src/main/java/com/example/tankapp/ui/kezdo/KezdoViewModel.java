@@ -1,16 +1,15 @@
-package com.example.tankapp.ui.gallery;
+package com.example.tankapp.ui.kezdo;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
-
+public class KezdoViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public KezdoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Ez az oldal fogja ábrázolni a tankolásokat");
+        mText.setValue("Kezdőoldal");
     }
 
     public LiveData<String> getText() {
