@@ -1,8 +1,13 @@
 package com.example.tankapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
+import com.example.tankapp.data.DatabaseHelper;
+
+import com.example.tankapp.data.TankolasModel;
+import com.example.tankapp.data.TankolasOsszetett;
 import com.example.tankapp.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
@@ -12,6 +17,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,28 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
         TankolasKonyvelesekDb = new DatabaseHelper(this);
 
+        TankolasKonyvelesekDb.addTankolasModel(new TankolasModel(2,"2023.04.07",2, 333,
+                2, 2, 2, 2,123.45f,12.96f));
 
-        TankolasKonyvelesekDb.addAutok("ABC-123");
-        TankolasKonyvelesekDb.addAutok("DEF-456");
-
-
-        TankolasKonyvelesekDb.addValutak("HUF");
-        TankolasKonyvelesekDb.addValutak("USD");
-
-        TankolasKonyvelesekDb.addUrmertekek("liter");
-        TankolasKonyvelesekDb.addUrmertekek("gallon");
-
-        TankolasKonyvelesekDb.addTavolsagok("méter");
-        TankolasKonyvelesekDb.addTavolsagok("mérföld");
-
-        TankolasKonyvelesekDb.addUzemanyagok("benzin");
-        TankolasKonyvelesekDb.addUzemanyagok("diesel");
-
-        TankolasKonyvelesekDb.addTankolasok("2023.03.26", 1, 350, 1, 2560, 1, 27,2, 1);
-        TankolasKonyvelesekDb.addTankolasok("2023.04.13", 2, 150, 2, 20, 2, 23,1, 1);
-        TankolasKonyvelesekDb.addTankolasok("2023.04.23", 2, 276, 1, 2000, 1, 18,1, 1);
-        TankolasKonyvelesekDb.addTankolasok("2023.05.17", 1, 220, 2, 50, 2, 10,2, 2);
-
+        ArrayList<TankolasOsszetett> ossz = TankolasKonyvelesekDb.osszesTankolas();
+        for(TankolasOsszetett akt : ossz)
+            Log.d("PROBA", akt.toString());
 
 
     }
