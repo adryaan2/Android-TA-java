@@ -24,4 +24,10 @@ public class TavolsagModel {
     public void setTavolsag(String tavolsag) {
         this.tavolsag = tavolsag;
     }
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", tavolsag='" + tavolsag;
+    }
 }

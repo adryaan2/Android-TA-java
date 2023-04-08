@@ -24,4 +24,10 @@ public class UrmertekModel {
     public void setUrmertek(String urmertek) {
         this.urmertek = urmertek;
     }
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", urmertek='" + urmertek;
+    }
 }

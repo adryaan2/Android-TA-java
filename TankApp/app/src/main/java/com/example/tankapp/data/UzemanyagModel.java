@@ -24,4 +24,10 @@ public class UzemanyagModel {
     public void setMegnev(String megnev) {
         this.megnev = megnev;
     }
+
+    @Override
+    public String toString() {
+        return "uzemanyagId=" + uzemanyagId +
+                ", megnev='" + megnev;
+    }
 }

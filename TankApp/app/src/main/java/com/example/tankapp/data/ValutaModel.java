@@ -24,4 +24,10 @@ public class ValutaModel {
     public void setValuta(String valuta) {
         this.valuta = valuta;
     }
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", valuta='" + valuta;
+    }
 }
