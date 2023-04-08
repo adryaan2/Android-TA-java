@@ -283,4 +283,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return tavLista;
     }
 
+    public ArrayList<TankolasOsszetett> getTankolasokByAutoId(int autoId){
+        String sql = "SELECT rendszam, valuta, urmertek, tavolsag, megnev, datum, megtett_tav, ar, menny ";
+        sql+= "FROM Tankolasok INNER JOIN Autok ON Autok.autoId = Tankolasok.autoId ";
+        sql+= "INNER JOIN Valutak ON Valutak.id = Tankolasok.valutaId ";
+        sql+= "INNER JOIN Urmertekek ON Urmertekek.id = Tankolasok.urmertekId ";
+        sql+= "INNER JOIN Tavolsagok ON Tavolsagok.id = Tankolasok.tavolsagId ";
+        sql+= "INNER JOIN Uzemanyagok ON Uzemanyagok.uzemanyagId = Tankolasok.uzemanyagId ";
+        sql+= "WHERE Tankolasok.autoId="+autoId+" ";
+        sql+= "ORDER BY datum DESC";
+
+        db = this.getReadableDatabase();
+        ArrayList<TankolasOsszetett> lista = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToFirst()){
+            do{
+                String rendsz = cursor.getString(0);
+                String valuta = cursor.getString(1);
+                String urmertek = cursor.getString(2);
+                String tavolsagEgyseg = cursor.getString(3);
+                String uzemanyag = cursor.getString(4);
+                String datum = cursor.getString(5);
+                int megtett_tav = cursor.getInt(6);
+                float ar = cursor.getFloat(7);
+                float menny = cursor.getFloat(8);
+                lista.add(new TankolasOsszetett(datum,
+                        rendsz, megtett_tav, tavolsagEgyseg,
+                        valuta, uzemanyag, urmertek, ar, menny));
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return lista;
+    }
+
 }

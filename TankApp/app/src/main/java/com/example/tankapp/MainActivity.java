@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         for(TavolsagModel akt : TankolasKonyvelesekDb.getTavolsagok())
             Log.d("TAV", akt.toString());
 
+        for(TankolasOsszetett akt : TankolasKonyvelesekDb.getTankolasokByAutoId(2))
+            Log.d("byID", akt.toString());
+
     }
 
 
