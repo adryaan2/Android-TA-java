@@ -1,8 +1,18 @@
 package com.example.tankapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
+import com.example.tankapp.data.AutoModel;
+import com.example.tankapp.data.DatabaseHelper;
+
+import com.example.tankapp.data.TankolasModel;
+import com.example.tankapp.data.TankolasOsszetett;
+import com.example.tankapp.data.TavolsagModel;
+import com.example.tankapp.data.UrmertekModel;
+import com.example.tankapp.data.UzemanyagModel;
+import com.example.tankapp.data.ValutaModel;
 import com.example.tankapp.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
@@ -12,6 +22,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,29 +59,36 @@ public class MainActivity extends AppCompatActivity {
 
         TankolasKonyvelesekDb = new DatabaseHelper(this);
 
+        TankolasKonyvelesekDb.addTankolasModel(new TankolasModel(2,"2023.04.07",2, 333,
+                2, 2, 2, 2,123.45f,12.96f));
 
-        TankolasKonyvelesekDb.addAutok("ABC-123");
-        TankolasKonyvelesekDb.addAutok("DEF-456");
+        ArrayList<TankolasOsszetett> ossz = TankolasKonyvelesekDb.getOsszesTankolas();
+        for(TankolasOsszetett akt : ossz)
+            Log.d("PROBA", akt.toString());
 
+        /// --------------------------------
 
-        TankolasKonyvelesekDb.addValutak("HUF");
-        TankolasKonyvelesekDb.addValutak("USD");
+        for(AutoModel akt : TankolasKonyvelesekDb.getAutok())
+            Log.d("AUTOK", akt.toString());
 
-        TankolasKonyvelesekDb.addUrmertekek("liter");
-        TankolasKonyvelesekDb.addUrmertekek("gallon");
+        Log.d("UTOLSO", TankolasKonyvelesekDb.getUtolsoTankolas().toString());
 
-        TankolasKonyvelesekDb.addTavolsagok("méter");
-        TankolasKonyvelesekDb.addTavolsagok("mérföld");
+        Log.d("SZAMA", String.valueOf(TankolasKonyvelesekDb.getTankolasokSzama()));
 
-        TankolasKonyvelesekDb.addUzemanyagok("benzin");
-        TankolasKonyvelesekDb.addUzemanyagok("diesel");
+        for(UzemanyagModel akt : TankolasKonyvelesekDb.getUzemanyagok())
+            Log.d("UZEMA", akt.toString());
 
-        TankolasKonyvelesekDb.addTankolasok("2023.03.26", 1, 350, 1, 2560, 1, 27,2, 1);
-        TankolasKonyvelesekDb.addTankolasok("2023.04.13", 2, 150, 2, 20, 2, 23,1, 1);
-        TankolasKonyvelesekDb.addTankolasok("2023.04.23", 2, 276, 1, 2000, 1, 18,1, 1);
-        TankolasKonyvelesekDb.addTankolasok("2023.05.17", 1, 220, 2, 50, 2, 10,2, 2);
+        for(ValutaModel akt : TankolasKonyvelesekDb.getValutak())
+            Log.d("VALUTAK", akt.toString());
 
+        for(UrmertekModel akt : TankolasKonyvelesekDb.getUrmertekek())
+            Log.d("URMERT", akt.toString());
 
+        for(TavolsagModel akt : TankolasKonyvelesekDb.getTavolsagok())
+            Log.d("TAV", akt.toString());
+
+        for(TankolasOsszetett akt : TankolasKonyvelesekDb.getTankolasokByAutoId(2))
+            Log.d("byID", akt.toString());
 
     }
 
