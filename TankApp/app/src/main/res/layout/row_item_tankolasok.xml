@@ -16,42 +16,46 @@
         android:layout_marginStart="8dp"
         android:layout_weight="9.8"
         android:gravity="center_horizontal|top"
-        android:text="2023.03.29"
+        android:text="@string/date_text"
         android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/tavTxt"
-        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:gravity="center_horizontal|top"
-        android:text="314 km" />
+        android:text="@string/distance_text"
+        android:textColor="@android:color/white"
+       />
 
     <TextView
         android:id="@+id/egysegarTxt"
-        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:gravity="center_horizontal|top"
-        android:text="627,30 Ft/l" />
+        android:text="@string/unit_price_text"
+        android:textColor="@android:color/white"
+       />
 
     <TextView
         android:id="@+id/mennyTxt"
-        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:gravity="center_horizontal|top"
-        android:text="25,41 l" />
+        android:text="@string/fuel_amount_text"
+        android:textColor="@android:color/white"
+        />
 
     <TextView
         android:id="@+id/uanyag_tipusTxt"
-        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:gravity="start|center_vertical"
-        android:text="Benzin 95" />
+        android:text="@string/fuel_type_text"
+        android:textColor="@android:color/white"
+        />
 </LinearLayout>

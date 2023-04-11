@@ -18,7 +18,7 @@
         android:letterSpacing="0.0"
         android:minHeight="50dp"
         android:paddingBottom="0dp"
-        android:text="Jelenlegi jármű: HUN-894"
+        android:text="@string/current_vehicle"
         android:textAllCaps="false"
         android:textSize="24sp"
         app:backgroundTint="@color/bottomBar"
