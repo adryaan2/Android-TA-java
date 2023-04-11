@@ -13,4 +13,21 @@
     <string name="menu_import_export">Import/Export</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_home_page">Kezdőlap</string>
+    <string name="current_vehicle">Jelenlegi jármű: HUN-894</string>
+
+    <string name="load_previously_saved">Korábban mentett adatok betöltése</string>
+    <string name="make_import">Importálás</string>
+    <string name="save_current_data">Jelenlegi adatbank mentése</string>
+    <string name="make_export">Exportálás</string>
+    <string name="delete_current_data">Jelenlegi adatbank törlése</string>
+    <string name="delete">Törlés</string>
+
+    <string name="refueling_in_current_data">Összes tankolás a jelenlegi adatbankban</string>
+    <string name="date_text">2023.03.29</string>
+    <string name="distance_text">314 km</string>
+    <string name="unit_price_text">627,30 Ft/l</string>
+    <string name="fuel_amount_text">25,41 l</string>
+    <string name="fuel_type_text">Benzin 95</string>
+
 </resources>
