@@ -13,4 +13,8 @@
     <color name="background">#041E60</color>
     <color name="h1">#E39506</color>
     <color name="bottomBar">#FFFF9800</color>
+    <color name="tankolas_felvetel_doboz">#FFEFC9</color>
+    <color name="black2">#000000</color>
+    <color name="white2">#FFFFFF</color>
+    <color name="grey_hint_text">#808080</color>
 </resources>

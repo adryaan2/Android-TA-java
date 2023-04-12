@@ -32,4 +32,11 @@
         android:name="com.example.tankapp.ui.imp_exp.ImpExpFragment"
         android:label="Import/Export"
         tools:layout="@layout/fragment_imp_exp" />
+
+    <fragment
+        android:id="@+id/nav_tankolasFelvetel"
+        android:name="com.example.tankapp.ui.tankolas_felvetel.TankolasFelvetelFragment"
+        android:label="Új tankolás"
+        tools:layout="@layout/fragment_tankolas_felvetel"
+    />
 </navigation>
