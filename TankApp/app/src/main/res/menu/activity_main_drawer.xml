@@ -8,7 +8,7 @@
             android:id="@+id/nav_kezdo"
             android:icon="@drawable/baseline_home_24"
             android:iconTint="@android:color/white"
-            android:title="Kezdőlap" />
+            android:title="@string/menu_home_page" />
         <item
             android:id="@+id/nav_tankolasok"
             android:icon="@drawable/ic_menu_gas_station"

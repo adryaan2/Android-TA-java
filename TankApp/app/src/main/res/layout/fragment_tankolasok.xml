@@ -16,7 +16,7 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-black"
         android:gravity="start|left"
-        android:text="Összes tankolás a jelenlegi adatbankban"
+        android:text="@string/refueling_in_current_data"
         android:textColor="@color/h1"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
