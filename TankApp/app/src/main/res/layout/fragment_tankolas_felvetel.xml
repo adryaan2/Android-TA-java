@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    app:layout_constraintVertical_chainStyle="spread"
+    tools:context=".ui.tankolas_felvetel.TankolasFelvetelFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/tankolas_felvetel_doboz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <TextView
+            android:id="@+id/text_tankolas_felvetel"
+            android:layout_width="0dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text="@string/uj_tankolas_cim"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_tf_datum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/datum_cim"
+            android:textColor="@color/black2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_tankolas_felvetel" />
+
+        <Button
+
+            android:id="@+id/date_picker_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white2"
+            android:gravity="center"
+            android:text="@string/datum_kivalsztas_szoveg"
+            android:textColor="@color/black2"
+            android:textSize="12sp"
+            app:backgroundTint="@color/white2"
+            app:layout_constraintStart_toStartOf="@+id/text_tf_datum"
+            app:layout_constraintTop_toBottomOf="@+id/text_tf_datum" />
+
+        <TextView
+            android:id="@+id/text_tf_datum2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/datum_kivalsztas_figyelmeztetes"
+            android:textColor="#ff0000"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_tf_datum"
+            app:layout_constraintStart_toEndOf="@+id/text_tf_datum" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:labelFor="@id/mertekegyseg"
+            android:text="@string/ut_cim"
+            android:textColor="@color/black2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/date_picker_button"
+            app:layout_constraintTop_toBottomOf="@+id/date_picker_button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="664dp"
+            android:text="@string/tankolas_mentes_szoveg"
+            android:textSize="14sp"
+            app:backgroundTint="@color/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.234"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:autofillHints="tavolsag"
+            android:background="@color/white2"
+            android:hint="@string/tavolsag_pelda"
+            android:inputType="numberDecimal"
+            android:labelFor="@id/mertekegyseg"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/black2"
+            android:textColorHint="@color/grey_hint_text"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/mertekegyseg"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <Spinner
+            android:id="@+id/mertekegyseg"
+            android:layout_width="146dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/ut_megadas_figyelmeztetes"
+            android:textColor="#FF0000"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:labelFor="@id/uzemanyag_tipus"
+            android:text="@string/uzemanyag_tipus_cim"
+            android:textColor="@color/black2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/editText"
+            app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+        <Spinner
+            android:id="@+id/uzemanyag_tipus"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:labelFor="@id/tankolt_mennyiseg"
+            android:text="@string/uzemanyag_mennyiseg_cim"
+            android:textColor="@color/black2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/uzemanyag_tipus"
+            app:layout_constraintTop_toBottomOf="@+id/uzemanyag_tipus" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:autofillHints="uzemanyag_mennyiseg"
+            android:background="@color/white2"
+            android:hint="@string/uzemanyag_mennyiseg_pelda"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/black2"
+            android:textColorHint="@color/grey_hint_text"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/tankolt_mennyiseg"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <Spinner
+            android:id="@+id/tankolt_mennyiseg"
+            android:layout_width="146dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editText2" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/mennyiseg_megadas_figyelmeztetes"
+            android:textColor="#FF0000"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:labelFor="@id/penznem"
+            android:text="@string/uzemanyag_egysegar_cim"
+            android:textColor="@color/black2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:autofillHints="uzemanyag_megadas"
+            android:background="@color/white2"
+            android:hint="@string/uzemanyag_megadas_pelda"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/black2"
+            android:textColorHint="@color/grey_hint_text"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/egysegar_megadas_figyelmeztetes"
+
+            android:textColor="#FF0000"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        <Spinner
+            android:id="@+id/penznem"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+
+            app:layout_constraintEnd_toStartOf="@+id/textView14"
+            app:layout_constraintStart_toEndOf="@+id/editText3"
+            app:layout_constraintTop_toTopOf="@+id/editText3" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="@string/uzemanyag_mertekegyseg"
+            android:textColor="@color/black2"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editText3"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@color/white2"
+            android:gravity="center"
+            android:text="@string/tankolas_mentes_szoveg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
