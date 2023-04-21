@@ -2,7 +2,7 @@ package com.example.tankapp.data;
 
 public class TankolasModel {
     private Integer tankId;
-    private String datum; //SQLite Stringként tárolja 2007-01-01 formátumban
+    private long datum; // napok száma 1970.01.01-től
     private int autoId;
     private int megtett_tav;
     private int tavolsagId;
@@ -12,7 +12,7 @@ public class TankolasModel {
     private float ar;
     private float menny;
 
-    public TankolasModel(Integer tankId, String datum, int autoId, int megtett_tav, int tavolsagId, int valutaId, int uzemanyagId, int urmertekId, float ar, float menny) {
+    public TankolasModel(Integer tankId, long datum, int autoId, int megtett_tav, int tavolsagId, int valutaId, int uzemanyagId, int urmertekId, float ar, float menny) {
         this.tankId = tankId;
         this.datum = datum;
         this.autoId = autoId;
@@ -33,11 +33,11 @@ public class TankolasModel {
         this.tankId = tankId;
     }
 
-    public String getDatum() {
+    public long getDatum() {
         return datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(long datum) {
         this.datum = datum;
     }
 

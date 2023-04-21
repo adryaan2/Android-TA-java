@@ -5,24 +5,29 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "TankolasKonyvelesek.db";
-    private SQLiteDatabase db;
+    protected SQLiteDatabase db;
+    private static DatabaseHelper singleton;
 
-    public DatabaseHelper(@Nullable Context context) {
+    protected DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
-        context.deleteDatabase("TankolasKonyvelesek.db");
     }
 
-    /// Csak a Tankolasokat kéne lemodellezni
-    /// mert a többi csak egy mező és az AUTOINCREMENT id ???
+    public static DatabaseHelper getInstance(Context context){
+        if(singleton==null)
+            singleton = new DatabaseHelper(context);
+        return singleton;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE Autok (autoId INTEGER PRIMARY KEY AUTOINCREMENT, rendszam TEXT, megj TEXT)"); //2db
@@ -30,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Urmertekek (id INTEGER PRIMARY KEY AUTOINCREMENT, urmertek TEXT)"); //l,gl
         db.execSQL("CREATE TABLE Tavolsagok (id INTEGER PRIMARY KEY AUTOINCREMENT, tavolsag TEXT)"); //km, miles
         db.execSQL("CREATE TABLE Uzemanyagok (uzemanyagId INTEGER PRIMARY KEY AUTOINCREMENT, megnev TEXT)"); //benzin, diesel
-        db.execSQL("CREATE TABLE Tankolasok (tankId INTEGER PRIMARY KEY AUTOINCREMENT, datum DATE, autoId INTEGER, megtett_tav INTEGER, tavolsagId INTEGER, ar FLOAT, valutaId INTEGER, menny FLOAT, uzemanyagId INTEGER, urmertekId INTEGER, FOREIGN KEY (autoId) REFERENCES Autok(autoId), FOREIGN KEY (tavolsagId) REFERENCES Tavolsagok(id), FOREIGN KEY (valutaId) REFERENCES Valutak(id), FOREIGN KEY (uzemanyagId) REFERENCES Uzemanyagok(uzemanyagId), FOREIGN KEY (urmertekId) REFERENCES Urmertekek(id) )");
+        db.execSQL("CREATE TABLE Tankolasok (tankId INTEGER PRIMARY KEY AUTOINCREMENT, datum INTEGER, autoId INTEGER, megtett_tav INTEGER, tavolsagId INTEGER, ar FLOAT, valutaId INTEGER, menny FLOAT, uzemanyagId INTEGER, urmertekId INTEGER, FOREIGN KEY (autoId) REFERENCES Autok(autoId), FOREIGN KEY (tavolsagId) REFERENCES Tavolsagok(id), FOREIGN KEY (valutaId) REFERENCES Valutak(id), FOREIGN KEY (uzemanyagId) REFERENCES Uzemanyagok(uzemanyagId), FOREIGN KEY (urmertekId) REFERENCES Urmertekek(id) )");
 
         this.db = db;
         feltolt();
@@ -46,17 +51,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         addUrmertekek("liter");
         addUrmertekek("gallon");
 
-        addTavolsagok("méter");
-        addTavolsagok("mérföld");
+        addTavolsagok("km");
+        addTavolsagok("mf");
 
         addUzemanyagok("benzin");
         addUzemanyagok("diesel");
 
-        addTankolasok("2023.03.26", 1, 350, 1, 2560, 1, 27,2, 1);
-        addTankolasok("2023.04.13", 2, 150, 2, 20, 2, 23,1, 1);
-        addTankolasok("2023.04.23", 2, 276, 1, 2000, 1, 18,1, 1);
-        addTankolasok("2023.05.17", 1, 220, 2, 50, 2, 10,2, 2);
+        addTankolasok(LocalDate.of(2023,3,11).toEpochDay(), 1, 350, 1, 2560, 1, 27,2, 1);
+        addTankolasok(LocalDate.of(2023,4,18).toEpochDay(), 2, 150, 2, 20, 2, 23,1, 1);
+        addTankolasok(LocalDate.of(2023,4,2).toEpochDay(), 2, 276, 1, 2000, 1, 18,1, 1);
+        addTankolasok(LocalDate.of(2023,3,26).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
     }
+
+    public void dbTest(){
+        ArrayList<TankolasOsszetett> ossz = getOsszesTankolas();
+        for(TankolasOsszetett akt : ossz)
+            Log.d("PROBA", akt.toString());
+
+        /// --------------------------------
+
+        for(AutoModel akt : getAutok())
+            Log.d("AUTOK", akt.toString());
+
+        Log.d("UTOLSO", getUtolsoTankolas().toString());
+
+        Log.d("SZAMA", String.valueOf(getTankolasokSzama()));
+
+        for(UzemanyagModel akt : getUzemanyagok())
+            Log.d("UZEMA", akt.toString());
+
+        for(ValutaModel akt : getValutak())
+            Log.d("VALUTAK", akt.toString());
+
+        for(UrmertekModel akt : getUrmertekek())
+            Log.d("URMERT", akt.toString());
+
+        for(TavolsagModel akt : getTavolsagok())
+            Log.d("TAV", akt.toString());
+
+        for(TankolasOsszetett akt : getTankolasokByAutoId(2))
+            Log.d("byID", akt.toString());
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -95,7 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("Uzemanyagok",null,values);
     }
 
-    public void addTankolasok(String Datum, int AutoId, int Megtett_tav, int TavolsagId, float Ar, int ValutaId, float Menny, int UzemanyagId, int UrmertekId ) {
+    public void addTankolasok(long Datum, int AutoId, int Megtett_tav, int TavolsagId, float Ar, int ValutaId, float Menny, int UzemanyagId, int UrmertekId ) {
         ContentValues values = new ContentValues();
         values.put("datum", Datum);
         values.put("autoId", AutoId);
@@ -145,7 +181,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String urmertek = cursor.getString(2);
                 String tavolsagEgyseg = cursor.getString(3);
                 String uzemanyag = cursor.getString(4);
-                String datum = cursor.getString(5);
+                long datum = cursor.getLong(5);
                 int megtett_tav = cursor.getInt(6);
                 float ar = cursor.getFloat(7);
                 float menny = cursor.getFloat(8);
@@ -191,7 +227,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String urmertek = cursor.getString(2);
             String tavolsagEgyseg = cursor.getString(3);
             String uzemanyag = cursor.getString(4);
-            String datum = cursor.getString(5);
+            long datum = cursor.getLong(5);
             int megtett_tav = cursor.getInt(6);
             float ar = cursor.getFloat(7);
             float menny = cursor.getFloat(8);
@@ -303,7 +339,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String urmertek = cursor.getString(2);
                 String tavolsagEgyseg = cursor.getString(3);
                 String uzemanyag = cursor.getString(4);
-                String datum = cursor.getString(5);
+                long datum = cursor.getLong(5);
                 int megtett_tav = cursor.getInt(6);
                 float ar = cursor.getFloat(7);
                 float menny = cursor.getFloat(8);
