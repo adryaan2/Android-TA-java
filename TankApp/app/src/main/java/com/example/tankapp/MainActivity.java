@@ -11,6 +11,7 @@ import com.example.tankapp.data.UrmertekModel;
 import com.example.tankapp.data.UzemanyagModel;
 import com.example.tankapp.data.ValutaModel;
 import com.example.tankapp.databinding.ActivityMainBinding;
+import com.example.tankapp.util.Stat;
 import com.google.android.material.navigation.NavigationView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -24,11 +25,19 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    DatabaseHelper TankolasKonyvelesekDb;
+
+    private static MainActivity instance;
+    public static MainActivity getContext(){ return instance; }
+
+    //MAJD KIVENNI----------------------------------------------
+    private Stat stat;
+
+    public static AutoModel aktivJarmu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance=this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -49,41 +58,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        deleteDatabase("TankolasKonyvelesekDb");
+        aktivJarmu=DatabaseHelper.getInstance(getContext())
+                .getAutok().get(0);
+        //MAJD KIVENNI----------------------------------------------
+        Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
+        stat = new Stat(); stat.statTest();
 
-        TankolasKonyvelesekDb = new DatabaseHelper(this);
-
-        TankolasKonyvelesekDb.addTankolasModel(new TankolasModel(2,"2023.04.07",2, 333,
-                2, 2, 2, 2,123.45f,12.96f));
-
-        ArrayList<TankolasOsszetett> ossz = TankolasKonyvelesekDb.getOsszesTankolas();
-        for(TankolasOsszetett akt : ossz)
-            Log.d("PROBA", akt.toString());
-
-        /// --------------------------------
-
-        for(AutoModel akt : TankolasKonyvelesekDb.getAutok())
-            Log.d("AUTOK", akt.toString());
-
-        Log.d("UTOLSO", TankolasKonyvelesekDb.getUtolsoTankolas().toString());
-
-        Log.d("SZAMA", String.valueOf(TankolasKonyvelesekDb.getTankolasokSzama()));
-
-        for(UzemanyagModel akt : TankolasKonyvelesekDb.getUzemanyagok())
-            Log.d("UZEMA", akt.toString());
-
-        for(ValutaModel akt : TankolasKonyvelesekDb.getValutak())
-            Log.d("VALUTAK", akt.toString());
-
-        for(UrmertekModel akt : TankolasKonyvelesekDb.getUrmertekek())
-            Log.d("URMERT", akt.toString());
-
-        for(TavolsagModel akt : TankolasKonyvelesekDb.getTavolsagok())
-            Log.d("TAV", akt.toString());
-
-        for(TankolasOsszetett akt : TankolasKonyvelesekDb.getTankolasokByAutoId(2))
-            Log.d("byID", akt.toString());
-
+        DatabaseHelper.getInstance(MainActivity.getContext()).dbTest();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

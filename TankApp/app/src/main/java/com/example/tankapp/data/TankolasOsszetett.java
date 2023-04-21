@@ -1,11 +1,12 @@
 package com.example.tankapp.data;
 
-import androidx.annotation.NonNull;
+import static java.time.format.DateTimeFormatter.ofPattern;
 
-import java.security.PublicKey;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TankolasOsszetett {
-    private String datum; //SQLite Stringként tárolja 2007-01-01 formátumban
+    private LocalDate datum; //SQLite Stringként tárolja 2007-01-01 formátumban
     private String auto;
     private int megtett_tav;
     private String tavolsagEgyseg;
@@ -15,8 +16,8 @@ public class TankolasOsszetett {
     private float ar;
     private float menny;
 
-    public TankolasOsszetett(String datum, String auto, int megtett_tav, String tavolsagEgyseg, String valuta, String uzemanyag, String urmertek, float ar, float menny) {
-        this.datum = datum;
+    public TankolasOsszetett(long datum, String auto, int megtett_tav, String tavolsagEgyseg, String valuta, String uzemanyag, String urmertek, float ar, float menny) {
+        this.datum = LocalDate.ofEpochDay(datum);
         this.auto = auto;
         this.megtett_tav = megtett_tav;
         this.tavolsagEgyseg = tavolsagEgyseg;
@@ -27,7 +28,7 @@ public class TankolasOsszetett {
         this.menny = menny;
     }
 
-    public String getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
@@ -79,7 +80,7 @@ public class TankolasOsszetett {
 
     @Override
     public String toString() {
-        return datum + ' ' +
+        return datum.format(ofPattern("yyyy.MM.dd")) + ' ' +
                 auto + ' ' +
                 megtett_tav +
                 " " + tavolsagEgyseg +
