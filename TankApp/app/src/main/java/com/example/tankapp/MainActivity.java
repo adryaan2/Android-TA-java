@@ -1,12 +1,9 @@
 package com.example.tankapp;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-
 import com.example.tankapp.data.AutoModel;
 import com.example.tankapp.data.DatabaseHelper;
-
 import com.example.tankapp.data.TankolasModel;
 import com.example.tankapp.data.TankolasOsszetett;
 import com.example.tankapp.data.TavolsagModel;
@@ -15,14 +12,12 @@ import com.example.tankapp.data.UzemanyagModel;
 import com.example.tankapp.data.ValutaModel;
 import com.example.tankapp.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -91,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("byID", akt.toString());
 
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
