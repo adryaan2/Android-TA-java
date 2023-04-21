@@ -15,21 +15,23 @@
     <string name="menu_add_fuel">Új tankolás</string>
 
     <string name="uj_tankolas_cim">Új tankolás rögzítése</string>
-    <string name="datum_cim">Dátum:</string>
-    <string name="datum_kivalsztas_szoveg">Válassza ki a tankolás időpontját</string>
-    <string name="datum_kivalsztas_figyelmeztetes">Hiba a dátumkiválasztásnál!</string>
+    <string name="datum_cim">Tankolás időpontja:</string>
+    <string name="datum_kivalsztas_szoveg">Adja meg a tankolás időpontját</string>
+    <string name="datum_kivalsztas_figyelmeztetes">A dátum megadásánál hiba lépett fel!</string>
     <string name="ut_cim">Megtett út:</string>
     <string name="tavolsag_pelda">pl: 124,3</string>
-    <string name="ut_megadas_figyelmeztetes">Hiba a távolság megadásánál!</string>
-    <string name="uzemanyag_tipus_cim">Tankolt üzemanyag típusa:</string>
-    <string name="uzemanyag_mennyiseg_cim">Tankolt üzemanyag mennyisége:</string>
+    <string name="mertekegyseg">Mértékegység:</string>
+    <string name="ut_megadas_figyelmeztetes">Az üzmeanyag típus megadásánál hiba lépett fel!</string>
+    <string name="uzemanyag_tipus_cim">Üzemanyag típusa:</string>
+    <string name="uzemanyag_mennyiseg_cim">Üzemanyag mennyisége:</string>
     <string name="uzemanyag_mennyiseg_pelda">pl: 10,5</string>
-    <string name="mennyiseg_megadas_figyelmeztetes">Hiba a mennyiség megadásánál!</string>
+    <string name="mennyiseg_megadas_figyelmeztetes">Az üzmeanyag mennyiség megadásánál hiba lépett fel!</string>
     <string name="uzemanyag_egysegar_cim">Üzemanyag egységára:</string>
+    <string name="penznem_cim">Pénznem:</string>
     <string name="uzemanyag_megadas_pelda">pl: 680,5</string>
-    <string name="egysegar_megadas_figyelmeztetes">Hiba az egységár megadásánál!</string>
+    <string name="egysegar_megadas_figyelmeztetes">Az üzmeanyag egyégár megadásánál hiba lépett fel!</string>
     <string name="uzemanyag_mertekegyseg">/ liter</string>
-    <string name="tankolas_mentes_szoveg">Mentés</string>
+    <string name="tankolas_mentes_szoveg">Tankolás mentése</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_home_page">Kezdőlap</string>
