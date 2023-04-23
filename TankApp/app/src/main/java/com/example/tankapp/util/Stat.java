@@ -15,6 +15,7 @@ import com.example.tankapp.ui.stats.TankolasokSzamaBontasban;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,16 +37,17 @@ public class Stat extends DatabaseHelper {
     public float literToGl(float l){return l*0.26417f;}
     public float glToLiter(float gl){return gl*3.78541f;}
 
+    /**
+     * @return liter/100km
+     */
     public float atlagFogy100kmen(){
         ArrayList<TankolasOsszetett> osszes = getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
-        float osszL=0; float osszKm=0;
+        float osszL=0;
         for(TankolasOsszetett akt : osszes){
-            if(Objects.equals(akt.getTavolsagEgyseg(), "km")) osszKm+=akt.getMegtett_tav();
-            else osszKm+=milesToKm(akt.getMegtett_tav());
             if(Objects.equals(akt.getUrmertek(), "liter")) osszL+= akt.getMenny();
-            else osszL=glToLiter(akt.getMenny());
+            else osszL+=glToLiter(akt.getMenny());
         }
-        return 100*osszL/osszKm;
+        return 100*osszL/osszesMegtettKm();
     }
 
     public float osszesMegtettKm(){
@@ -58,6 +60,9 @@ public class Stat extends DatabaseHelper {
         return osszKm;
     }
 
+    /**
+     * @return Az aktivJarmu-nek átlagosan hány tankolása van egy hónapban
+     */
     public double haviAtlagTankolasok(){
         List<LocalDate> datumLista = getDatumokByAutoId(MainActivity.aktivJarmu.getAutoId());
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM");
@@ -75,6 +80,9 @@ public class Stat extends DatabaseHelper {
         return eredm.getAsDouble();
     }
 
+    /**
+     * @return Az aktivJarmu egy tankolása átlagosan ennyi kilométer megtételére elég
+     */
     public float atlagUtPerTankolas(){
         int tankolasokSzama;
         String sql = "SELECT COUNT(*) FROM Tankolasok WHERE autoId="+MainActivity.aktivJarmu.getAutoId();
@@ -103,6 +111,24 @@ public class Stat extends DatabaseHelper {
         return arrayList;
     }
 
+    public ArrayList<TankolasokSzamaBontasban> tankolasokSzamaHetente(){
+        List<LocalDate> datumLista = getDatumokByAutoId(MainActivity.aktivJarmu.getAutoId());
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/");
+        List<String> hetekOsszes = datumLista.stream()
+                .sorted(Comparator.reverseOrder())
+                .map(x -> x.format(dateTimeFormatter) + x.get(WeekFields.ISO.weekOfYear())+".hét")
+                .collect(Collectors.toList());
+        List<String> hetekDistinct = hetekOsszes.stream()
+                .distinct()
+                .collect(Collectors.toList());
+        ArrayList<TankolasokSzamaBontasban> arrayList = new ArrayList<>();
+        for(String honap : hetekDistinct){
+            int gyakorisag = Collections. frequency(hetekOsszes, honap);
+            arrayList.add(new TankolasokSzamaBontasban(honap,gyakorisag));
+        }
+        return arrayList;
+    }
+
     public void statTest(){
         Log.d("ATL_FOGY", String.valueOf(atlagFogy100kmen()));
         Log.d("OSSZKM", String.valueOf(osszesMegtettKm()));
@@ -110,9 +136,8 @@ public class Stat extends DatabaseHelper {
         Log.d("ATLAGUT", String.valueOf(atlagUtPerTankolas()));
         for(TankolasokSzamaBontasban akt : tankolasokSzamaHavonta())
             Log.d("HAVIBONTAS",akt.getIdoszak()+": "+akt.getTankolasokSzama());
-
-
-        //LocalDate ld;
+        for(TankolasokSzamaBontasban akt : tankolasokSzamaHetente())
+            Log.d("HETIBONTAS",akt.getIdoszak()+": "+akt.getTankolasokSzama());
 
     }
 }

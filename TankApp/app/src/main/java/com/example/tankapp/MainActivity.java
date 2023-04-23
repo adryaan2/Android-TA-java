@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 .getAutok().get(0);
         //MAJD KIVENNI----------------------------------------------
         Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
-        stat = new Stat(); stat.statTest();
 
         DatabaseHelper.getInstance(MainActivity.getContext()).dbTest();
     }
