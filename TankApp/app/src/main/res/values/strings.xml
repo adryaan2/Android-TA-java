@@ -50,5 +50,16 @@
     <string name="unit_price_text">627,30 Ft/l</string>
     <string name="fuel_amount_text">25,41 l</string>
     <string name="fuel_type_text">Benzin 95</string>
+    <string name="legutobbi_tankolas">Legutóbbi tankolás:</string>
+    <string name="atlagfogyasztas">Átlagfogyasztás</string>
+    <string name="atlag_fogyasztas">Átlagfogyasztás:</string>
+    <string name="osszes_megtett_ut">Összes megtett út:</string>
+    <string name="eltelt_ido">Idő</string>
+    <string name="uzemanyag_mennyiseg">Liter</string>
+    <string name="uzemanyag_tipus">Benzin</string>
+    <string name="uzemanyag_ar">Üzemanyag ár</string>
+    <string name="km_utan">Km után</string>
+    <string name="atlag_fogyasztas_text">l/km</string>
+    <string name="osszes_megtett_ut_text">Km</string>
 
 </resources>

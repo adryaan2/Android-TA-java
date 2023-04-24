@@ -2,6 +2,8 @@ package com.example.tankapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.TextView;
+
 import com.example.tankapp.data.AutoModel;
 import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.data.TankolasModel;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         instance=this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
 
         setSupportActionBar(binding.appBarMain.toolbar);
