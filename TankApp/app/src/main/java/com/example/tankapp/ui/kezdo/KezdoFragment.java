@@ -15,11 +15,6 @@ import com.example.tankapp.databinding.FragmentKezdoBinding;
 
 public class KezdoFragment extends Fragment{
     private FragmentKezdoBinding binding;
-    private TextView eltelt;
-    private TextView liter;
-
-
-
 
    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
