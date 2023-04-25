@@ -57,10 +57,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         addUzemanyagok("benzin");
         addUzemanyagok("diesel");
 
-        addTankolasok(LocalDate.of(2023,3,11).toEpochDay(), 1, 350, 1, 2560, 1, 27,2, 1);
+
         addTankolasok(LocalDate.of(2023,4,18).toEpochDay(), 2, 150, 2, 20, 2, 23,1, 1);
         addTankolasok(LocalDate.of(2023,4,2).toEpochDay(), 2, 276, 1, 2000, 1, 18,1, 1);
+
+        addTankolasok(LocalDate.of(2023,3,11).toEpochDay(), 1, 350, 1, 2560, 1, 27,2, 1);
         addTankolasok(LocalDate.of(2023,3,26).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
+        addTankolasok(LocalDate.of(2023,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
+
+        addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
+        addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
+        addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
+
     }
 
     public void dbTest(){
@@ -346,6 +354,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 lista.add(new TankolasOsszetett(datum,
                         rendsz, megtett_tav, tavolsagEgyseg,
                         valuta, uzemanyag, urmertek, ar, menny));
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return lista;
+    }
+
+    public ArrayList<LocalDate> getDatumokByAutoId(int autoId){
+        String sql = "SELECT datum ";
+        sql+= "FROM Tankolasok ";
+        sql+= "WHERE Tankolasok.autoId="+autoId+" ";
+        sql+= "ORDER BY datum DESC";
+
+        db = this.getReadableDatabase();
+        ArrayList<LocalDate> lista = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToFirst()){
+            do{
+                long datum = cursor.getLong(0);
+                lista.add(LocalDate.ofEpochDay(datum));
             }while(cursor.moveToNext());
         }
         cursor.close();
