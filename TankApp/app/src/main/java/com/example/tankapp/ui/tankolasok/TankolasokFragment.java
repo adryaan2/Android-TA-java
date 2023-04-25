@@ -26,7 +26,7 @@ public class TankolasokFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tankolasok, container, false);
 
-        lista = DatabaseHelper.getInstance(MainActivity.getContext()).getOsszesTankolas();
+        lista = DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerV);
 

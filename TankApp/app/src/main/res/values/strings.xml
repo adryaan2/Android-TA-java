@@ -44,7 +44,7 @@
     <string name="delete_current_data">Jelenlegi adatbank törlése</string>
     <string name="delete">Törlés</string>
 
-    <string name="refueling_in_current_data">Összes tankolás a jelenlegi adatbankban</string>
+    <string name="refueling_in_current_data">Összes tankolás a kiválasztott járművel</string>
     <string name="date_text">Dátum</string>
     <string name="distance_text">Megtett táv</string>
     <string name="unit_price_text">Egységár</string>
