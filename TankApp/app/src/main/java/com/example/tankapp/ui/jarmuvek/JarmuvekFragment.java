@@ -1,21 +1,40 @@
 package com.example.tankapp.ui.jarmuvek;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tankapp.MainActivity;
+import com.example.tankapp.R;
+import com.example.tankapp.data.AutoModel;
+import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.databinding.FragmentJarmuvekBinding;
+import com.example.tankapp.ui.jarmu_felvetel.JarmuFelvetelFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JarmuvekFragment extends Fragment {
 
     private FragmentJarmuvekBinding binding;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
 
+    private Button addCarButton;
+
+    private List<AutoModel> autoModelList;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         JarmuvekViewModel jarmuvekViewModel =
@@ -23,9 +42,16 @@ public class JarmuvekFragment extends Fragment {
 
         binding = FragmentJarmuvekBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        recyclerView = root.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        autoModelList = DatabaseHelper.getInstance(MainActivity.getContext()).getAutok();
 
-        final TextView textView = binding.textHome;
-        jarmuvekViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        adapter = new JarmuvekAdapter(autoModelList,this.getContext());
+        recyclerView.setAdapter(adapter);
+        addCarButton = root.findViewById(R.id.addCarButton);
+
+
         return root;
     }
 
