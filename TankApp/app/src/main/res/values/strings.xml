@@ -32,6 +32,15 @@
     <string name="egysegar_megadas_figyelmeztetes">Az üzmeanyag egyégár megadásánál hiba lépett fel!</string>
     <string name="uzemanyag_mertekegyseg">/ liter</string>
     <string name="tankolas_mentes_szoveg">Tankolás mentése</string>
+    <string name="jarmu_hozzaadas_szoveg">Új jármű hozzáadása</string>
+    <string name="rendszam_cim">A jármű rendszáma :</string>
+    <string name="rendszam_megadas_figyelmeztetes">A rendszám megadásánál hiba lépett fel!</string>
+    <string name="rendszam_megadas_pelda">pl: AAA-000</string>
+    <string name="jarmu_nev_cim">A jármű elnevezése (becenév, stb...) :</string>
+    <string name="jarmu_elnevezes_figyelmeztetes">A jármű elnevezésénél hiba lépett fel!</string>
+    <string name="jarmu_nev_megadas_pelda">pl: Tűzmadár</string>
+    <string name="jarmu_mentes_szoveg">Jármű mentése</string>
+    <string name="jarmuvek_cim">Járművek listája</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_home_page">Kezdőlap</string>

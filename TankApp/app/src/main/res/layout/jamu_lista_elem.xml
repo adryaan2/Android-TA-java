@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="15dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:background="@color/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+         <TextView
+             android:id="@+id/numberPlateTitle"
+             android:text="Heading"
+             android:textColor="@color/white2"
+             android:textAllCaps="true"
+             android:textStyle="bold"
+             android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+         </TextView>
+
+        <TextView
+            android:id="@+id/carNameTitle"
+            android:text="carName"
+            android:textColor="@color/white2"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+    </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
