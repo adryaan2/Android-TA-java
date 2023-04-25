@@ -45,10 +45,10 @@
     <string name="delete">Törlés</string>
 
     <string name="refueling_in_current_data">Összes tankolás a jelenlegi adatbankban</string>
-    <string name="date_text">2023.03.29</string>
-    <string name="distance_text">314 km</string>
-    <string name="unit_price_text">627,30 Ft/l</string>
-    <string name="fuel_amount_text">25,41 l</string>
-    <string name="fuel_type_text">Benzin 95</string>
+    <string name="date_text">Dátum</string>
+    <string name="distance_text">Megtett táv</string>
+    <string name="unit_price_text">Egységár</string>
+    <string name="fuel_amount_text">Menny.</string>
+    <string name="fuel_type_text">Üzemanyag</string>
 
 </resources>

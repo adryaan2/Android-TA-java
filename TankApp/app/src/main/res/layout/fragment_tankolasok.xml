@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tankolasok.TankolasokFragment"
-    android:background="@color/black">
+    android:background="@color/black"
+    tools:context=".ui.tankolasok.TankolasokFragment">
 
     <TextView
         android:id="@+id/titleTxt"
@@ -24,17 +24,85 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="bottom"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerV"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTxt">
 
-    <ListView
-        android:id="@+id/listV"
+
+        <TextView
+            android:id="@+id/datumTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_weight="9.8"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center_horizontal|bottom"
+            android:text="@string/date_text"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tavTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="center_horizontal|bottom"
+            android:text="@string/distance_text"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-black"/>
+
+        <TextView
+            android:id="@+id/egysegarTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="center_horizontal|bottom"
+            android:text="@string/unit_price_text"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-black"/>
+
+        <TextView
+            android:id="@+id/mennyTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="center_horizontal|bottom"
+            android:text="@string/fuel_amount_text"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-black"/>
+
+        <TextView
+            android:id="@+id/uanyag_tipusTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="start|bottom"
+            android:text="@string/fuel_type_text"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-black"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerV"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:dividerHeight="3dp"
         app:layout_constraintBottom_toTopOf="@+id/include2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <include
         android:id="@+id/include2"
