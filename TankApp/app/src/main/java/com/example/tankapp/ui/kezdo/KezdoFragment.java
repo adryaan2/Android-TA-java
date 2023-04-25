@@ -57,13 +57,17 @@ public class KezdoFragment extends Fragment{
         super.onStart();
         View view = getView();
         if (view != null) {
-           String megtettUt = TankolasOsszetett.xMegtettUt();
-           String tankoltMennyiseg = TankolasOsszetett.xTankoltMennyiseg();
-           String uzemanyag = TankolasOsszetett.getUzemanyag();
-           LocalDate datum = TankolasOsszetett.getDatum();
-           String egysegar = TankolasOsszetett.xEgysegar();
-           float atlagFogy = Stat.atFogy;
-           float osszesUt = Stat.osszMeg;
+            DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
+            TankolasOsszetett tankolasOsszetett = dbHelper.getOsszesTankolas().get(0);
+            Stat stat = new Stat();
+           String megtettUt = tankolasOsszetett.xMegtettUt();
+           String tankoltMennyiseg = tankolasOsszetett.xTankoltMennyiseg();
+           String uzemanyag = tankolasOsszetett.getUzemanyag();
+           LocalDate datum = tankolasOsszetett.getDatum();
+           String egysegar = tankolasOsszetett.xEgysegar();
+           float atlagFogy = stat.atlagFogy100kmen();
+           float osszesUt = stat.osszesMegtettKm();
+
 
             TextView eltelt = (TextView) view.findViewById(R.id.eltelt_ido);
             TextView mennyiseg = (TextView) view.findViewById(R.id.uzemanyag_mennyiseg);

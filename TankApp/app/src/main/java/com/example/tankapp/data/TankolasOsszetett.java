@@ -14,16 +14,16 @@ import java.util.Date;
 import java.util.Objects;
 
 public class TankolasOsszetett {
-    private static LocalDate datum; //SQLite Stringként tárolja 2007-01-01 formátumban
+    private LocalDate datum; //SQLite Stringként tárolja 2007-01-01 formátumban
     private String auto;
-    private static int megtettTav;
-    private static String tavolsagEgyseg;
-    private static String valuta;
-    private static String uzemanyag;
-    private static String urmertek;
-    private static float ar;
-    private static float menny;
-    private static float oszto;
+    private int megtettTav;
+    private String tavolsagEgyseg;
+    private String valuta;
+    private String uzemanyag;
+    private String urmertek;
+    private float ar;
+    private float menny;
+    private float oszto;
 
     public TankolasOsszetett(long datum, String auto, int megtettTav, String tavolsagEgyseg, String valuta, String uzemanyag, String urmertek, float ar, float menny) {
         this.datum = LocalDate.ofEpochDay(datum);
@@ -37,7 +37,7 @@ public class TankolasOsszetett {
         this.menny = menny;
     }
 
-    public static LocalDate getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
@@ -45,11 +45,11 @@ public class TankolasOsszetett {
         return auto;
     }
 
-    public static int getMegtett_tav() {
+    public int getMegtett_tav() {
         return megtettTav;
     }
 
-    public static String getTavolsagEgyseg() {
+    public  String getTavolsagEgyseg() {
         return tavolsagEgyseg;
     }
 
@@ -57,7 +57,7 @@ public class TankolasOsszetett {
         return valuta;
     }
 
-    public static String getUzemanyag() {
+    public  String getUzemanyag() {
         return uzemanyag;
     }
 
@@ -73,25 +73,25 @@ public class TankolasOsszetett {
         return menny;
     }
 
-    public static String xAtlagfogyasztas() {
+    public String xAtlagfogyasztas() {
         oszto = (megtettTav / 100.0f);
         return (menny / oszto + " l/100km");
     }
 
-    public static String xFizetve() {
+    public String xFizetve() {
         return (ar * menny) + " " + valuta;
     }
 
 
-    public static String xTankoltMennyiseg() {
+    public String xTankoltMennyiseg() {
         return menny + " " + urmertek;
     }
 
-    public static String xMegtettUt() {
+    public String xMegtettUt() {
         return megtettTav + " " + tavolsagEgyseg;
     }
 
-    public static String xEgysegar() {
+    public String xEgysegar() {
         return ar + " " + valuta + "/" + urmertek;
     }
 
