@@ -1,7 +1,10 @@
 package com.example.tankapp.util;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -17,9 +20,11 @@ public class Stat extends DatabaseHelper {
         super(MainActivity.getContext());
     }
     public float kmToMiles(float km){return km*0.62137f;}
-    public float milesToKm(float mi){return mi*1.60934f;}
+    public static float milesToKm(float mi){return mi*1.60934f;}
     public float literToGl(float l){return l*0.26417f;}
-    public float glToLiter(float gl){return gl*3.78541f;}
+    public static float glToLiter(float gl){return gl*3.78541f;}
+    public static float osszMeg = 0;
+    public static float atFogy = 0;
 
     public float atlagFogy100kmen(){
         ArrayList<TankolasOsszetett> osszes = getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
@@ -30,7 +35,8 @@ public class Stat extends DatabaseHelper {
             if(Objects.equals(akt.getUrmertek(), "liter")) osszL+= akt.getMenny();
             else osszL=glToLiter(akt.getMenny());
         }
-        return 100*osszL/osszKm;
+        atFogy = 100*osszL/osszKm;
+        return atFogy;
     }
 
     public float osszesMegtettKm(){
@@ -40,12 +46,15 @@ public class Stat extends DatabaseHelper {
             if(Objects.equals(akt.getTavolsagEgyseg(), "km")) osszKm+=akt.getMegtett_tav();
             else osszKm+=milesToKm(akt.getMegtett_tav());
         }
-        return osszKm;
+        osszMeg = osszKm;
+        return osszMeg;
     }
 
     /*public float haviAtlagTankolasok(){
 
     }*/
+
+
 
     public void statTest(){
         Log.d("ATL_FOGY", String.valueOf(atlagFogy100kmen()));
