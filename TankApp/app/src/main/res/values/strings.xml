@@ -34,7 +34,7 @@
     <string name="tankolas_mentes_szoveg">Tankolás mentése</string>
     <string name="jarmu_hozzaadas_szoveg">Új jármű hozzáadása</string>
     <string name="rendszam_cim">A jármű rendszáma :</string>
-    <string name="rendszam_megadas_figyelmeztetes">A rendszám megadásánál hiba lépett fel!</string>
+    <string name="rendszam_megadas_figyelmeztetes">A rendszám legyen legalább 7 karakter!</string>
     <string name="rendszam_megadas_pelda">pl: AAA-000</string>
     <string name="jarmu_nev_cim">A jármű elnevezése (becenév, stb...) :</string>
     <string name="jarmu_elnevezes_figyelmeztetes">A jármű elnevezésénél hiba lépett fel!</string>

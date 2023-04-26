@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.jarmuvek.JarmuvekFragment"
-    android:background="@color/black"
-    android:id="@+id/replaceLayout">
+    android:background="@color/black">
+    <!--android:id="@+id/replaceLayout"> -->
 
     <TextView
         android:id="@+id/text_home"
