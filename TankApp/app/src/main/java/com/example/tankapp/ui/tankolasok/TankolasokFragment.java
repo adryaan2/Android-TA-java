@@ -4,55 +4,39 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tankapp.databinding.FragmentTankolasokBinding;
+import com.example.tankapp.MainActivity;
+import com.example.tankapp.R;
+import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.TankolasOsszetett;
 
 import java.util.ArrayList;
 
 public class TankolasokFragment extends Fragment {
 
-    ArrayList<TestModel> dataModels;
-    private static TankolasokAdapter adapter;
-
-    private FragmentTankolasokBinding binding;
+    ArrayList<TankolasOsszetett> lista;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        TankolasokViewModel tankolasokViewModel =
-                new ViewModelProvider(this).get(TankolasokViewModel.class);
-        binding = FragmentTankolasokBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        final ListView listView = binding.listV;
-        /*
-        tankolasokViewModel.getItem().removeObservers(this);
-        tankolasokViewModel.getItem().observe(getViewLifecycleOwner(), new Observer<TestModel>() {
-            @Override
-            public void onChanged(TestModel testModel) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_tankolasok, container, false);
 
-            }
-        });*/
-        dataModels= new ArrayList<>();
-        for(int i=0; i<10; i++){
-            dataModels.add(new TestModel("2023.03.28","345 km", "645,29 Ft/l", "24,31 l", "Benzin 95"));
-            dataModels.add(new TestModel("2023.04.22","345 km", "700,00 Ft/l", "11,68 l", "Benzin 98 Super"));
-        }
-        adapter = new TankolasokAdapter(dataModels,getContext());
-        listView.setAdapter(adapter);
+        lista = DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
 
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerV);
 
-        return root;
-    }
+        RecyclerAdapter adapter = new RecyclerAdapter(lista);
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+        return view;
     }
 }
