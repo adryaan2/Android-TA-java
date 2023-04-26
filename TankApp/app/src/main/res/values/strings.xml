@@ -19,7 +19,7 @@
     <string name="datum_kivalsztas_szoveg">Adja meg a tankolás időpontját</string>
     <string name="datum_kivalsztas_figyelmeztetes">A dátum megadásánál hiba lépett fel!</string>
     <string name="ut_cim">Megtett út:</string>
-    <string name="tavolsag_pelda">pl: 124,3</string>
+    <string name="tavolsag_pelda">pl: 124</string>
     <string name="mertekegyseg">Mértékegység:</string>
     <string name="ut_megadas_figyelmeztetes">Az üzmeanyag típus megadásánál hiba lépett fel!</string>
     <string name="uzemanyag_tipus_cim">Üzemanyag típusa:</string>
@@ -32,6 +32,15 @@
     <string name="egysegar_megadas_figyelmeztetes">Az üzmeanyag egyégár megadásánál hiba lépett fel!</string>
     <string name="uzemanyag_mertekegyseg">/ liter</string>
     <string name="tankolas_mentes_szoveg">Tankolás mentése</string>
+    <string name="jarmu_hozzaadas_szoveg">Új jármű hozzáadása</string>
+    <string name="rendszam_cim">A jármű rendszáma :</string>
+    <string name="rendszam_megadas_figyelmeztetes">A rendszám megadásánál hiba lépett fel!</string>
+    <string name="rendszam_megadas_pelda">pl: AAA-000</string>
+    <string name="jarmu_nev_cim">A jármű elnevezése (becenév, stb...) :</string>
+    <string name="jarmu_elnevezes_figyelmeztetes">A jármű elnevezésénél hiba lépett fel!</string>
+    <string name="jarmu_nev_megadas_pelda">pl: Tűzmadár</string>
+    <string name="jarmu_mentes_szoveg">Jármű mentése</string>
+    <string name="jarmuvek_cim">Járművek listája</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_home_page">Kezdőlap</string>
@@ -44,12 +53,13 @@
     <string name="delete_current_data">Jelenlegi adatbank törlése</string>
     <string name="delete">Törlés</string>
 
-    <string name="refueling_in_current_data">Összes tankolás a jelenlegi adatbankban</string>
-    <string name="date_text">2023.03.29</string>
-    <string name="distance_text">314 km</string>
-    <string name="unit_price_text">627,30 Ft/l</string>
-    <string name="fuel_amount_text">25,41 l</string>
-    <string name="fuel_type_text">Benzin 95</string>
+
+    <string name="refueling_in_current_data">Összes tankolás a kiválasztott járművel</string>
+    <string name="date_text">Dátum</string>
+    <string name="distance_text">Megtett táv</string>
+    <string name="unit_price_text">Egységár</string>
+    <string name="fuel_amount_text">Menny.</string>
+    <string name="fuel_type_text">Üzemanyag</string>
     <string name="legutobbi_tankolas">Legutóbbi tankolás:</string>
     <string name="atlagfogyasztas">Átlagfogyasztás</string>
     <string name="atlag_fogyasztas">Átlagfogyasztás:</string>
