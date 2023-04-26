@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/background"
-    tools:context=".MainActivity">
+    tools:context=".ui.tankolas_felvetel.TankolasFelvetelFragment">
 
     <ScrollView
         android:layout_width="0dp"

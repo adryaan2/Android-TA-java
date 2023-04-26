@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,7 +53,10 @@ public class JarmuvekFragment extends Fragment {
         adapter = new JarmuvekAdapter(autoModelList,this.getContext());
         recyclerView.setAdapter(adapter);
         addCarButton = root.findViewById(R.id.addCarButton);
-
+        addCarButton.setOnClickListener(v->{
+            Navigation.findNavController(v).getGraph().setStartDestination(R.id.nav_kezdo);
+            Navigation.findNavController(v).navigate(R.id.action_nav_jarmuvek_to_jarmuFelvetelFragment);
+        });
 
         return root;
     }

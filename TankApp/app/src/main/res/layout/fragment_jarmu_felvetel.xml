@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/background"
-    tools:context=".MainActivity">
+    tools:context=".ui.jarmu_felvetel.JarmuFelvetelFragment">
 
     <ScrollView
         android:layout_width="0dp"
@@ -75,7 +75,7 @@
                 android:autofillHints="10"
                 android:background="@drawable/input_field"
                 android:hint="@string/rendszam_megadas_pelda"
-                android:inputType="number"
+                android:inputType="text"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black2"
@@ -118,7 +118,7 @@
                 android:autofillHints="10"
                 android:background="@drawable/input_field"
                 android:hint="@string/jarmu_nev_megadas_pelda"
-                android:inputType="number"
+                android:inputType="text"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black2"

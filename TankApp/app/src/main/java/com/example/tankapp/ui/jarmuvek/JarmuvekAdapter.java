@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +23,13 @@ public class JarmuvekAdapter extends RecyclerView.Adapter<JarmuvekAdapter.ViewHo
     private List<AutoModel> autoModelsList;
     private Context context;
 
+    private View parent;
+    Button aktJarmuBtn;
+
     public JarmuvekAdapter(List<AutoModel> autoModelsList, Context context) {
         this.autoModelsList = autoModelsList;
-        this.context = context;
+        this.aktJarmuBtn= MainActivity.getContext().findViewById(R.id.aktJarmuBtn);
+        this.context=context;
     }
 
 
@@ -32,6 +37,7 @@ public class JarmuvekAdapter extends RecyclerView.Adapter<JarmuvekAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.jamu_lista_elem,parent,false);
+
         return new ViewHolder(view);
     }
 
@@ -44,7 +50,10 @@ public class JarmuvekAdapter extends RecyclerView.Adapter<JarmuvekAdapter.ViewHo
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, autoModel.getRendszam() + " jelű járműre váltott",Toast.LENGTH_SHORT).show();
+                MainActivity.aktivJarmu = autoModel;
+                //Button aktJarmuBtn = parent.findViewById(R.id.aktJarmuBtn);
+                aktJarmuBtn.setText("Jelenlegi jármű: "+MainActivity.aktivJarmu.getRendszam());
+                Toast.makeText(context, MainActivity.aktivJarmu.getRendszam() + " jelű járműre váltott",Toast.LENGTH_SHORT).show();
             }
         });
 
