@@ -1,8 +1,11 @@
 package com.example.tankapp.util;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -128,6 +131,8 @@ public class Stat extends DatabaseHelper {
         }
         return arrayList;
     }
+
+
 
     public void statTest(){
         Log.d("ATL_FOGY", String.valueOf(atlagFogy100kmen()));

@@ -53,11 +53,23 @@
     <string name="delete_current_data">Jelenlegi adatbank törlése</string>
     <string name="delete">Törlés</string>
 
+
     <string name="refueling_in_current_data">Összes tankolás a kiválasztott járművel</string>
     <string name="date_text">Dátum</string>
     <string name="distance_text">Megtett táv</string>
     <string name="unit_price_text">Egységár</string>
     <string name="fuel_amount_text">Menny.</string>
     <string name="fuel_type_text">Üzemanyag</string>
+    <string name="legutobbi_tankolas">Legutóbbi tankolás:</string>
+    <string name="atlagfogyasztas">Átlagfogyasztás</string>
+    <string name="atlag_fogyasztas">Átlagfogyasztás:</string>
+    <string name="osszes_megtett_ut">Összes megtett út:</string>
+    <string name="eltelt_ido">Idő</string>
+    <string name="uzemanyag_mennyiseg">Liter</string>
+    <string name="uzemanyag_tipus">Benzin</string>
+    <string name="uzemanyag_ar">Üzemanyag ár</string>
+    <string name="km_utan">Km után</string>
+    <string name="atlag_fogyasztas_text">l/km</string>
+    <string name="osszes_megtett_ut_text">Km</string>
 
 </resources>
