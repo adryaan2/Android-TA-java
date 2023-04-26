@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
-import com.example.tankapp.data.AutoModel;
+import com.example.tankapp.data.models.AutoModel;
 
 import java.util.List;
 
@@ -23,12 +23,8 @@ public class JarmuvekAdapter extends RecyclerView.Adapter<JarmuvekAdapter.ViewHo
     private List<AutoModel> autoModelsList;
     private Context context;
 
-    private View parent;
-    Button aktJarmuBtn;
-
     public JarmuvekAdapter(List<AutoModel> autoModelsList, Context context) {
         this.autoModelsList = autoModelsList;
-        this.aktJarmuBtn= MainActivity.getContext().findViewById(R.id.aktJarmuBtn);
         this.context=context;
     }
 
@@ -37,7 +33,6 @@ public class JarmuvekAdapter extends RecyclerView.Adapter<JarmuvekAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.jamu_lista_elem,parent,false);
-
         return new ViewHolder(view);
     }
 
@@ -51,8 +46,7 @@ public class JarmuvekAdapter extends RecyclerView.Adapter<JarmuvekAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 MainActivity.aktivJarmu = autoModel;
-                //Button aktJarmuBtn = parent.findViewById(R.id.aktJarmuBtn);
-                aktJarmuBtn.setText("Jelenlegi jármű: "+MainActivity.aktivJarmu.getRendszam());
+                MainActivity.refreshAktJarmuBtn();
                 Toast.makeText(context, MainActivity.aktivJarmu.getRendszam() + " jelű járműre váltott",Toast.LENGTH_SHORT).show();
             }
         });

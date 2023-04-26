@@ -9,6 +9,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.tankapp.data.models.AutoModel;
+import com.example.tankapp.data.models.TankolasModel;
+import com.example.tankapp.data.models.TavolsagModel;
+import com.example.tankapp.data.models.UrmertekModel;
+import com.example.tankapp.data.models.UzemanyagModel;
+import com.example.tankapp.data.models.ValutaModel;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 

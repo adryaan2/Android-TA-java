@@ -1,4 +1,4 @@
-package com.example.tankapp.data;
+package com.example.tankapp.data.models;
 
 public class UrmertekModel {
     private int id;

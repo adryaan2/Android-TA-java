@@ -2,18 +2,11 @@ package com.example.tankapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.TextView;
+import android.widget.Button;
 
-import com.example.tankapp.data.AutoModel;
+import com.example.tankapp.data.models.AutoModel;
 import com.example.tankapp.data.DatabaseHelper;
-import com.example.tankapp.data.TankolasModel;
-import com.example.tankapp.data.TankolasOsszetett;
-import com.example.tankapp.data.TavolsagModel;
-import com.example.tankapp.data.UrmertekModel;
-import com.example.tankapp.data.UzemanyagModel;
-import com.example.tankapp.data.ValutaModel;
 import com.example.tankapp.databinding.ActivityMainBinding;
-import com.example.tankapp.util.Stat;
 import com.google.android.material.navigation.NavigationView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,7 +14,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,10 +23,12 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity instance;
     public static MainActivity getContext(){ return instance; }
 
-    //MAJD KIVENNI----------------------------------------------
-    private Stat stat;
-
     public static AutoModel aktivJarmu;
+
+
+
+    static private Button aktJarmuBtn;
+    public static void refreshAktJarmuBtn() {aktJarmuBtn.setText("Jelenlegi jármű: "+aktivJarmu.getRendszam());}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         instance=this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        deleteDatabase("TankolasKonyvelesek.db");
 
 
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -67,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
 
         DatabaseHelper.getInstance(MainActivity.getContext()).dbTest();
+        aktJarmuBtn = findViewById(R.id.aktJarmuBtn);
+        aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

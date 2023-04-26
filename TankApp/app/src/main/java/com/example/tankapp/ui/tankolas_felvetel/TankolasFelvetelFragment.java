@@ -1,15 +1,17 @@
 package com.example.tankapp.ui.tankolas_felvetel;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,10 +22,10 @@ import android.widget.TextView;
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.data.DatabaseHelper;
-import com.example.tankapp.data.TavolsagModel;
-import com.example.tankapp.data.UrmertekModel;
-import com.example.tankapp.data.UzemanyagModel;
-import com.example.tankapp.data.ValutaModel;
+import com.example.tankapp.data.models.TavolsagModel;
+import com.example.tankapp.data.models.UrmertekModel;
+import com.example.tankapp.data.models.UzemanyagModel;
+import com.example.tankapp.data.models.ValutaModel;
 import com.example.tankapp.databinding.FragmentTankolasFelvetelBinding;
 
 import java.time.LocalDate;
@@ -201,6 +203,7 @@ public class TankolasFelvetelFragment extends Fragment {
 
                 if (hozzaadhatoE) {
                     DatabaseHelper.getInstance(MainActivity.getContext()).addTankolasok(date.toEpochDay(), MainActivity.aktivJarmu.getAutoId(), Integer.parseInt(String.valueOf(txt_tavolsag.getText())), (int)tavolsagSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagEgysegar.getText())), (int)valutaSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagMennyiseg.getText())), (int)uzemanyagSpinner.getSelectedItemId() + 1, (int)urmertekSpinner.getSelectedItemId() + 1);
+                    getFragmentManager().popBackStack();
                 }
             }
         });
@@ -209,9 +212,20 @@ public class TankolasFelvetelFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        hideKeyboardFrom(getContext(),getView());
+    }
+
+    @Override
     public void onDestroyView(){
         super.onDestroyView();
         binding = null;
+    }
+
+    public static void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 

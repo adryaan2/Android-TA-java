@@ -1,19 +1,13 @@
 package com.example.tankapp.ui.jarmuvek;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,12 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
-import com.example.tankapp.data.AutoModel;
+import com.example.tankapp.data.models.AutoModel;
 import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.databinding.FragmentJarmuvekBinding;
-import com.example.tankapp.ui.jarmu_felvetel.JarmuFelvetelFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class JarmuvekFragment extends Fragment {

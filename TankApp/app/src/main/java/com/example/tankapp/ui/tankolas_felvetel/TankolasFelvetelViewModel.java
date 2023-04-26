@@ -6,10 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.tankapp.data.DatabaseHelper;
-
-import java.lang.invoke.MutableCallSite;
-
 
 public class TankolasFelvetelViewModel extends ViewModel {
 

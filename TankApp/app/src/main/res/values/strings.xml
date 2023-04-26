@@ -21,7 +21,7 @@
     <string name="ut_cim">Megtett út:</string>
     <string name="tavolsag_pelda">pl: 124</string>
     <string name="mertekegyseg">Mértékegység:</string>
-    <string name="ut_megadas_figyelmeztetes">Az üzmeanyag típus megadásánál hiba lépett fel!</string>
+    <string name="ut_megadas_figyelmeztetes">Adja meg a legutóbbi tankolás óta megtett távolságot</string>
     <string name="uzemanyag_tipus_cim">Üzemanyag típusa:</string>
     <string name="uzemanyag_mennyiseg_cim">Üzemanyag mennyisége:</string>
     <string name="uzemanyag_mennyiseg_pelda">pl: 10,5</string>
