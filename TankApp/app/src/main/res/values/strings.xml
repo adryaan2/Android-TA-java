@@ -19,7 +19,7 @@
     <string name="datum_kivalsztas_szoveg">Adja meg a tankolás időpontját</string>
     <string name="datum_kivalsztas_figyelmeztetes">A dátum megadásánál hiba lépett fel!</string>
     <string name="ut_cim">Megtett út:</string>
-    <string name="tavolsag_pelda">pl: 124,3</string>
+    <string name="tavolsag_pelda">pl: 124</string>
     <string name="mertekegyseg">Mértékegység:</string>
     <string name="ut_megadas_figyelmeztetes">Az üzmeanyag típus megadásánál hiba lépett fel!</string>
     <string name="uzemanyag_tipus_cim">Üzemanyag típusa:</string>
