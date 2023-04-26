@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "TankolasKonyvelesek.db";
-    protected SQLiteDatabase db;
+    protected static SQLiteDatabase db;
     private static DatabaseHelper singleton;
 
     protected DatabaseHelper(@Nullable Context context) {
