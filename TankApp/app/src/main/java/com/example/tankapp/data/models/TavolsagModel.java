@@ -1,4 +1,4 @@
-package com.example.tankapp.data;
+package com.example.tankapp.data.models;
 
 public class TavolsagModel {
     private int id;

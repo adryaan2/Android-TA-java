@@ -2,16 +2,7 @@ package com.example.tankapp.data;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-import com.example.tankapp.MainActivity;
-import com.example.tankapp.util.Stat;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
 
 public class TankolasOsszetett {
     private LocalDate datum; //SQLite Stringként tárolja 2007-01-01 formátumban

@@ -1,6 +1,5 @@
 package com.example.tankapp.ui.kezdo;
 
-import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

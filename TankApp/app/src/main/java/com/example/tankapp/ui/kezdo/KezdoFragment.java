@@ -1,32 +1,27 @@
 package com.example.tankapp.ui.kezdo;
 
+import static com.example.tankapp.MainActivity.aktivJarmu;
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
-import com.example.tankapp.data.TankolasOsszetett;
-import com.example.tankapp.util.Stat;
 import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.data.TankolasOsszetett;
 import com.example.tankapp.databinding.FragmentKezdoBinding;
+import com.example.tankapp.util.Stat;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
 
 public class KezdoFragment extends Fragment{
     private FragmentKezdoBinding binding;
@@ -41,11 +36,6 @@ public class KezdoFragment extends Fragment{
         View root = binding.getRoot();
 
 
-        final TextView textView = binding.texthome;
-
-        kezdoViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        Button jarmuvekBtn = root.findViewById(R.id.aktJarmuBtn);
-        jarmuvekBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
         return root;
 
 
@@ -60,9 +50,10 @@ public class KezdoFragment extends Fragment{
     public void onStart() {
         super.onStart();
         View view = getView();
+        MainActivity.refreshAktJarmuBtn();
         if (view != null) {
             DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
-            TankolasOsszetett tankolasOsszetett = dbHelper.getOsszesTankolas().get(0);
+            TankolasOsszetett tankolasOsszetett = dbHelper.getTankolasokByAutoId(aktivJarmu.getAutoId()).get(0);
             Stat stat = new Stat();
            String megtettUt = tankolasOsszetett.xMegtettUt();
            String tankoltMennyiseg = tankolasOsszetett.xTankoltMennyiseg();
@@ -82,13 +73,14 @@ public class KezdoFragment extends Fragment{
             TextView atlag = (TextView) view.findViewById(R.id.atlagfogyasztas_text);
             TextView osszes = (TextView) view.findViewById(R.id.osszesut_text);
 
-            eltelt.setText("" + datum);
+            eltelt.setText(DAYS.between(datum, LocalDate.now())+" napja");
             mennyiseg.setText(tankoltMennyiseg);
             tipus.setText(uzemanyag);
             ar.setText(egysegar);
-            utan.setText(megtettUt);
+            utan.setText(megtettUt+" után");
 
-            atlag.setText(atlagFogy + " l/100km");
+            DecimalFormat df = new DecimalFormat("#.####");
+            atlag.setText(df.format(atlagFogy)+ " l/100km");
             osszes.setText(osszesUt + " km");
 
 

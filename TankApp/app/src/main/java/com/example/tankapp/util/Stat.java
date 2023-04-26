@@ -1,34 +1,24 @@
 package com.example.tankapp.util;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.data.TankolasOsszetett;
-import com.example.tankapp.data.UzemanyagModel;
 import com.example.tankapp.ui.stats.TankolasokSzamaBontasban;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.OptionalDouble;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Stat extends DatabaseHelper {
