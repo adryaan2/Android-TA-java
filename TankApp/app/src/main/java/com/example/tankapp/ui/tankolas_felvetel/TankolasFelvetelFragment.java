@@ -47,6 +47,10 @@ public class TankolasFelvetelFragment extends Fragment {
         binding = FragmentTankolasFelvetelBinding.inflate(inflater, container, false);
 
         View root = binding.getRoot();
+
+        TextView txt_rendsz = root.findViewById(R.id.carNumPlate);
+        txt_rendsz.setText(MainActivity.aktivJarmu.getRendszam());
+
         btn_date = root.findViewById(R.id.setDateTimeButton);
         btn_mentes = root.findViewById(R.id.saveRefuellingButton);
         /**

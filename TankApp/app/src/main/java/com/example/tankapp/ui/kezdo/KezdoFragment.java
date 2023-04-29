@@ -55,10 +55,11 @@ public class KezdoFragment extends Fragment{
         if (view != null) {
             Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
             aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
-            aktJarmuBtn.setOnClickListener(v->{
+            aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
+            /*aktJarmuBtn.setOnClickListener(v->{
                 Navigation.findNavController(v).getGraph().setStartDestination(R.id.nav_kezdo);
                 Navigation.findNavController(v).navigate(R.id.action_nav_kezdo_to_nav_jarmuvek);
-            });
+            });*/
 
            DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
            TankolasOsszetett tankolasOsszetett = dbHelper.getTankolasokByAutoId(aktivJarmu.getAutoId()).get(0);

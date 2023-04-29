@@ -1,15 +1,20 @@
 package com.example.tankapp.ui.stats;
 
+import static com.example.tankapp.MainActivity.aktivJarmu;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.example.tankapp.R;
 import com.example.tankapp.databinding.FragmentStatsBinding;
 
 public class StatsFragment extends Fragment {
@@ -27,6 +32,17 @@ public class StatsFragment extends Fragment {
         final TextView textView = binding.textSlideshow;
         statsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        View view = getView();
+        if(view != null){
+            Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
+            aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
+            aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_stats_to_nav_jarmuvek));
+        }
     }
 
     @Override

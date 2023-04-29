@@ -9,12 +9,11 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/mainTitle"
+        android:background="@drawable/rounded_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,15 +29,43 @@
                 android:id="@+id/mainTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="@string/uj_tankolas_cim"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:textColor="@color/black2"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/carNumPlate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:textColor="@color/black2"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/carHintText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
+
+            <TextView
+                android:id="@+id/carHintText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/jelenlegi_auto_szoveg"
+                android:textColor="@color/black2"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carNumPlate" />
 
             <TextView
                 android:id="@+id/dateTitle"
@@ -47,11 +74,11 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
                 android:text="@string/datum_cim"
+                android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/carHintText" />
 
             <TextView
                 android:id="@+id/dateAlertText"
@@ -71,9 +98,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/background"
                 android:text="@string/datum_kivalsztas_szoveg"
                 android:textColor="@color/white2"
-                android:backgroundTint="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dateAlertText" />
@@ -84,9 +111,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/ut_cim"
+                android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black2"
                 app:layout_constraintStart_toStartOf="@+id/dateTitle"
                 app:layout_constraintTop_toBottomOf="@+id/setDateTimeButton" />
 
@@ -108,13 +135,13 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:autofillHints="10"
+                android:background="@drawable/input_field"
                 android:hint="@string/tavolsag_pelda"
+                android:inputType="number"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black2"
                 android:textColorHint="@color/grey_hint_text"
-                android:background="@drawable/input_field"
-                android:inputType="number"
                 app:layout_constraintEnd_toStartOf="@+id/distanceUnitSpinner"
                 app:layout_constraintHorizontal_bias="0.52"
                 app:layout_constraintStart_toStartOf="@+id/distanceTitle"
@@ -135,9 +162,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/uzemanyag_tipus_cim"
+                android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black2"
                 app:layout_constraintStart_toStartOf="@+id/dateTitle"
                 app:layout_constraintTop_toBottomOf="@+id/distanceInputField" />
 
@@ -146,9 +173,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mertekegyseg"
+                android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black2"
                 app:layout_constraintStart_toStartOf="@+id/distanceUnitSpinner"
                 app:layout_constraintTop_toTopOf="@+id/distanceTitle" />
 
@@ -157,8 +184,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ut_megadas_figyelmeztetes"
-                android:textSize="12sp"
                 android:textColor="@color/alert"
+                android:textSize="12sp"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/fuelTypeTitle"
                 app:layout_constraintTop_toBottomOf="@+id/fuelTypeTitle" />
@@ -180,9 +207,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/uzemanyag_mennyiseg_cim"
+                android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black2"
                 app:layout_constraintStart_toStartOf="@+id/dateTitle"
                 app:layout_constraintTop_toBottomOf="@+id/fuelTypeSpinner" />
 
@@ -191,9 +218,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mertekegyseg"
+                android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black2"
                 app:layout_constraintStart_toStartOf="@+id/fuelUnitTypeSpinner"
                 app:layout_constraintTop_toTopOf="@+id/fuelQuantityTitle" />
 
@@ -202,8 +229,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mennyiseg_megadas_figyelmeztetes"
-                android:textSize="12sp"
                 android:textColor="@color/alert"
+                android:textSize="12sp"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/fuelQuantityTitle"
                 app:layout_constraintTop_toBottomOf="@+id/fuelQuantityTitle" />
@@ -215,11 +242,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:autofillHints="10"
+                android:background="@drawable/input_field"
                 android:hint="@string/uzemanyag_mennyiseg_pelda"
+                android:inputType="number|numberDecimal"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:background="@drawable/input_field"
-                android:inputType="number|numberDecimal"
                 android:textColor="@color/black2"
                 android:textColorHint="@color/grey_hint_text"
                 app:layout_constraintEnd_toStartOf="@+id/fuelUnitTypeSpinner"
@@ -241,9 +268,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/uzemanyag_egysegar_cim"
+                android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black2"
                 app:layout_constraintStart_toStartOf="@+id/dateTitle"
                 app:layout_constraintTop_toBottomOf="@+id/fuelQuantityInputField" />
 
@@ -252,8 +279,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/egysegar_megadas_figyelmeztetes"
-                android:textSize="12sp"
                 android:textColor="@color/alert"
+                android:textSize="12sp"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/fuelPriceTitle"
                 app:layout_constraintTop_toBottomOf="@+id/fuelPriceTitle" />
@@ -265,11 +292,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:autofillHints="10"
+                android:background="@drawable/input_field"
                 android:hint="@string/uzemanyag_megadas_pelda"
+                android:inputType="number|numberDecimal"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:background="@drawable/input_field"
-                android:inputType="number|numberDecimal"
                 android:textColor="@color/black2"
                 android:textColorHint="@color/grey_hint_text"
                 app:layout_constraintEnd_toStartOf="@+id/fuelCurrencySpinner"
@@ -281,8 +308,8 @@
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="10dp"
-                android:minWidth="40dp"
                 android:background="@drawable/spinner_style"
+                android:minWidth="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/fuelPriceInputField" />
 
@@ -294,9 +321,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/background"
                 android:text="@string/tankolas_mentes_szoveg"
                 android:textColor="@color/white2"
-                android:backgroundTint="@color/background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -307,9 +334,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/penznem_cim"
+                android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black2"
                 app:layout_constraintStart_toStartOf="@+id/fuelCurrencySpinner"
                 app:layout_constraintTop_toTopOf="@+id/fuelPriceTitle" />
 
