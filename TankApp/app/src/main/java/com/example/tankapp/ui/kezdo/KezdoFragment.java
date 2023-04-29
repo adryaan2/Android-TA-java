@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
@@ -50,11 +52,17 @@ public class KezdoFragment extends Fragment{
     public void onStart() {
         super.onStart();
         View view = getView();
-        MainActivity.refreshAktJarmuBtn();
         if (view != null) {
-            DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
-            TankolasOsszetett tankolasOsszetett = dbHelper.getTankolasokByAutoId(aktivJarmu.getAutoId()).get(0);
-            Stat stat = new Stat();
+            Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
+            aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
+            aktJarmuBtn.setOnClickListener(v->{
+                Navigation.findNavController(v).getGraph().setStartDestination(R.id.nav_kezdo);
+                Navigation.findNavController(v).navigate(R.id.action_nav_kezdo_to_nav_jarmuvek);
+            });
+
+           DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
+           TankolasOsszetett tankolasOsszetett = dbHelper.getTankolasokByAutoId(aktivJarmu.getAutoId()).get(0);
+           Stat stat = new Stat();
            String megtettUt = tankolasOsszetett.xMegtettUt();
            String tankoltMennyiseg = tankolasOsszetett.xTankoltMennyiseg();
            String uzemanyag = tankolasOsszetett.getUzemanyag();

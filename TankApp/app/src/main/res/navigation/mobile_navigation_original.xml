@@ -64,7 +64,7 @@
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.tankapp.MainActivity"
-        android:label="fragment_kezdo"
-        tools:layout="@layout/fragment_kezdo" />
+        android:label="fragment_tankolas_felvetel"
+        tools:layout="@layout/fragment_tankolas_felvetel" />
 
 </navigation>

@@ -25,11 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static AutoModel aktivJarmu;
 
-
-
-    static private Button aktJarmuBtn;
-    public static void refreshAktJarmuBtn() {aktJarmuBtn.setText("Jelenlegi jármű: "+aktivJarmu.getRendszam());}
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
 
         DatabaseHelper.getInstance(MainActivity.getContext()).dbTest();
-        aktJarmuBtn = findViewById(R.id.aktJarmuBtn);
-        aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
