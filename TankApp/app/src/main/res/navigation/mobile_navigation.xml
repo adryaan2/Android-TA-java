@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_kezdo_to_nav_jarmuvek"
             app:destination="@id/nav_jarmuvek" />
+        <action
+            android:id="@+id/action_nav_kezdo_to_nav_tankolasFelvetel"
+            app:destination="@id/nav_tankolasFelvetel" />
     </fragment>
 
     <fragment
@@ -33,6 +36,9 @@
         <action
             android:id="@+id/action_nav_tankolasok_to_nav_jarmuvek"
             app:destination="@id/nav_jarmuvek" />
+        <action
+            android:id="@+id/action_nav_tankolasok_to_nav_tankolasFelvetel"
+            app:destination="@id/nav_tankolasFelvetel" />
     </fragment>
 
     <fragment

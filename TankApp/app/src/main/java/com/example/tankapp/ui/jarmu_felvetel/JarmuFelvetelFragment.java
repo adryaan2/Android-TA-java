@@ -45,6 +45,7 @@ public class JarmuFelvetelFragment extends Fragment {
 
         binding = FragmentJarmuFelvetelBinding.inflate(inflater, container, false);
 
+        MainActivity.getContext().hideUjtankolasBtn();
         View root = binding.getRoot();
         hozzaadBtn = root.findViewById(R.id.saveVehicleButton);
         rendszEdit = root.findViewById(R.id.numberPlateInputField);

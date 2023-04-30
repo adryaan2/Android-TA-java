@@ -45,7 +45,7 @@ public class TankolasFelvetelFragment extends Fragment {
         TankolasFelvetelViewModel tankolasFelvetelViewModel = new ViewModelProvider(this).get(TankolasFelvetelViewModel.class);
 
         binding = FragmentTankolasFelvetelBinding.inflate(inflater, container, false);
-
+        MainActivity.getContext().hideUjtankolasBtn();
         View root = binding.getRoot();
 
         TextView txt_rendsz = root.findViewById(R.id.carNumPlate);

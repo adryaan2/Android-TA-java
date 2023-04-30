@@ -2,6 +2,7 @@ package com.example.tankapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.tankapp.data.models.AutoModel;
@@ -69,5 +70,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void hideUjtankolasBtn(){
+        Button ujTankolasBtn = findViewById(R.id.ujTankolasBtn);
+        ujTankolasBtn.setVisibility(View.GONE);
+    }
+
+    public void showUjtankolasBtn(){
+        Button ujTankolasBtn = findViewById(R.id.ujTankolasBtn);
+        ujTankolasBtn.setVisibility(View.VISIBLE);
     }
 }

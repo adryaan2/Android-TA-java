@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.databinding.FragmentStatsBinding;
 
@@ -27,10 +28,8 @@ public class StatsFragment extends Fragment {
                 new ViewModelProvider(this).get(StatsViewModel.class);
 
         binding = FragmentStatsBinding.inflate(inflater, container, false);
+        MainActivity.getContext().hideUjtankolasBtn();
         View root = binding.getRoot();
-
-        final TextView textView = binding.textSlideshow;
-        statsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

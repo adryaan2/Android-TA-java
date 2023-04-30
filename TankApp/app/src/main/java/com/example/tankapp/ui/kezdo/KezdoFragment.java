@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
@@ -36,8 +37,6 @@ public class KezdoFragment extends Fragment{
 
         binding = FragmentKezdoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-
         return root;
 
 
@@ -51,15 +50,16 @@ public class KezdoFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
+        MainActivity.getContext().showUjtankolasBtn();
         View view = getView();
         if (view != null) {
+            //új tankolás gomb navigáljon a felületre
+            Button ujTankolasBtn = view.getRootView().findViewById(R.id.ujTankolasBtn);
+            ujTankolasBtn.setOnClickListener(v->NavHostFragment.findNavController(this).navigate(R.id. action_nav_kezdo_to_nav_tankolasFelvetel));
+
             Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
             aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
             aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
-            /*aktJarmuBtn.setOnClickListener(v->{
-                Navigation.findNavController(v).getGraph().setStartDestination(R.id.nav_kezdo);
-                Navigation.findNavController(v).navigate(R.id.action_nav_kezdo_to_nav_jarmuvek);
-            });*/
 
            DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
            TankolasOsszetett tankolasOsszetett = dbHelper.getTankolasokByAutoId(aktivJarmu.getAutoId()).get(0);
