@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,7 +56,7 @@ public class JarmuFelvetelFragment extends Fragment {
 
         hozzaadBtn.setOnClickListener(v->{
             DatabaseHelper dh = DatabaseHelper.getInstance(MainActivity.getContext());
-            String rendsz = rendszEdit.getText().toString();
+            String rendsz = rendszEdit.getText().toString().trim();
             String megj = megjEdit.getText().toString();
             if(rendsz.length()<7){
                 rendszHibaTxt.setVisibility(View.VISIBLE);
@@ -65,7 +66,7 @@ public class JarmuFelvetelFragment extends Fragment {
             Log.d("uj_megj: ",megj);
             dh.addAutok(rendsz, megj);
             Toast.makeText(getContext(), "Jármű hozzáadva",Toast.LENGTH_SHORT).show();
-            getFragmentManager().popBackStack();
+            Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_jarmuvek);
         });
 
         return root;

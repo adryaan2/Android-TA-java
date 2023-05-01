@@ -4,28 +4,199 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.stats.StatsFragment"
-    android:background="@color/black">
+    android:background="@color/black"
+    tools:context=".ui.stats.StatsFragment">
+
 
     <TextView
-        android:id="@+id/text_slideshow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/atlFogyCim"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="start"
+        android:text="@string/atlag_fogyasztas_kiiras"
+        android:textColor="@color/h1"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/atlFogyErtek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif"
+        android:gravity="start"
+        android:text="100l/100km"
+        android:textColor="@color/mainTitle"
+
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/atlFogyCim"
+        app:layout_constraintTop_toBottomOf="@+id/atlFogyCim" />
+
+    <TextView
+        android:id="@+id/havontaHanyszorCim"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="start"
+        android:hyphenationFrequency="full"
+        android:text="@string/havi_tankolasok_szama_atlag"
+        android:textColor="@color/h1"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/atlFogyCim"
+
+        app:layout_constraintTop_toBottomOf="@+id/atlFogyErtek" />
+
+    <TextView
+        android:id="@+id/havontaHanyszorErtek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif"
+        android:gravity="start"
+        android:text="100l/100km"
+        android:textColor="@color/mainTitle"
+
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/havontaHanyszorCim"
+        app:layout_constraintTop_toBottomOf="@+id/havontaHanyszorCim" />
+
+    <TextView
+        android:id="@+id/egyTankTavCim"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="start"
+        android:text="@string/egy_tankolas_mennyire_eleg"
+        android:textColor="@color/h1"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/atlFogyCim"
+        app:layout_constraintTop_toBottomOf="@+id/havontaHanyszorErtek"
+
+        android:hyphenationFrequency="full"/>
+
+    <TextView
+        android:id="@+id/egyTankTavErtek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif"
+        android:gravity="start"
+        android:text="100l/100km"
+        android:textColor="@color/mainTitle"
+
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/havontaHanyszorCim"
+        app:layout_constraintTop_toBottomOf="@+id/egyTankTavCim" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/include3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/atlFogyCim"
+        app:layout_constraintTop_toBottomOf="@+id/utolsoDivider">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="@string/tankolasok_heti_bontas_title"
+                android:textColor="@color/h1"
+                android:textSize="22sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hetiRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="@string/tankolasok_havi_bontas_title"
+                android:textColor="@color/h1"
+                android:textSize="22sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/haviRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
     <include
+        android:id="@+id/include3"
         layout="@layout/bottom_bar_vehicle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/list_item_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/atlFogyErtek" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/list_item_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/havontaHanyszorErtek" />
+
+    <View
+        android:id="@+id/utolsoDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/list_item_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/egyTankTavErtek" />
 </androidx.constraintlayout.widget.ConstraintLayout>

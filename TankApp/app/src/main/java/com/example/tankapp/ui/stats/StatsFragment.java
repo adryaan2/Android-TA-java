@@ -13,14 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.databinding.FragmentStatsBinding;
+import com.example.tankapp.util.Stat;
+
+import java.text.DecimalFormat;
 
 public class StatsFragment extends Fragment {
 
     private FragmentStatsBinding binding;
+    private TextView atlFogy;
+    private TextView havontaHanyszor;
+    private TextView egyTankTav;
+
+    private Stat stat;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +39,8 @@ public class StatsFragment extends Fragment {
 
         binding = FragmentStatsBinding.inflate(inflater, container, false);
         MainActivity.getContext().hideUjtankolasBtn();
+
+
         View root = binding.getRoot();
         return root;
     }
@@ -41,6 +53,25 @@ public class StatsFragment extends Fragment {
             Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
             aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
             aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_stats_to_nav_jarmuvek));
+
+            stat = new Stat();
+
+            atlFogy=binding.atlFogyErtek;
+            havontaHanyszor=binding.havontaHanyszorErtek;
+            egyTankTav=binding.egyTankTavErtek;
+
+            DecimalFormat df = new DecimalFormat("#.###");
+            atlFogy.setText(df.format(stat.atlagFogy100kmen()) + " l/100km");
+            egyTankTav.setText(df.format(stat.atlagUtPerTankolas()) + " km");
+            df.applyPattern("#.##");
+            havontaHanyszor.setText(df.format(stat.haviAtlagTankolasok()));
+
+            RecyclerView hetiRV = binding.hetiRV;
+            RecyclerView haviRV = binding.haviRV;
+            hetiRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+            haviRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+            hetiRV.setAdapter(new BontasAdapter(stat.tankolasokSzamaHetente()));
+            haviRV.setAdapter(new BontasAdapter(stat.tankolasokSzamaHavonta()));
         }
     }
 

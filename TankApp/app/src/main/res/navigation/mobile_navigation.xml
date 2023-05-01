@@ -66,7 +66,13 @@
         android:id="@+id/jarmuFelvetelFragment"
         android:name="com.example.tankapp.ui.jarmu_felvetel.JarmuFelvetelFragment"
         android:label="JarmuFelvetelFragment"
-        tools:layout="@layout/fragment_jarmu_felvetel"/>
+        tools:layout="@layout/fragment_jarmu_felvetel">
+        <action
+            android:id="@+id/action_jarmuFelvetelFragment_to_nav_jarmuvek"
+            app:destination="@id/nav_jarmuvek"
+            app:popUpTo="@id/nav_jarmuvek"
+            app:popUpToInclusive="true" />
+    </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.tankapp.MainActivity"

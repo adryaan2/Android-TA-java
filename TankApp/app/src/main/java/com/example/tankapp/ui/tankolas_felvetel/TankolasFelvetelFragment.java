@@ -8,6 +8,8 @@ import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -207,7 +209,7 @@ public class TankolasFelvetelFragment extends Fragment {
 
                 if (hozzaadhatoE) {
                     DatabaseHelper.getInstance(MainActivity.getContext()).addTankolasok(date.toEpochDay(), MainActivity.aktivJarmu.getAutoId(), Integer.parseInt(String.valueOf(txt_tavolsag.getText())), (int)tavolsagSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagEgysegar.getText())), (int)valutaSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagMennyiseg.getText())), (int)uzemanyagSpinner.getSelectedItemId() + 1, (int)urmertekSpinner.getSelectedItemId() + 1);
-                    getFragmentManager().popBackStack();
+                    Navigation.findNavController(view).navigate(R.id.nav_kezdo);
                 }
             }
         });
