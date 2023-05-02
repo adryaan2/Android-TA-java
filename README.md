@@ -6,7 +6,7 @@ Feladat rövid ismertetése: Tankolások könyvelése, s ebből statisztikák k�
 
 Felhasznált programozási nyelv: C# vagy Java
 
-Operációs rendszer: Android 8.0+
+Operációs rendszer: Android 9.0+
 
 Csak álló tájolás
 
