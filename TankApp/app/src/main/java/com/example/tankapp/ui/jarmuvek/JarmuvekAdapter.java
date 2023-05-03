@@ -46,7 +46,6 @@ public class JarmuvekAdapter extends RecyclerView.Adapter<JarmuvekAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 MainActivity.aktivJarmu = autoModel;
-                MainActivity.refreshAktJarmuBtn();
                 Toast.makeText(context, MainActivity.aktivJarmu.getRendszam() + " jelű járműre váltott",Toast.LENGTH_SHORT).show();
             }
         });

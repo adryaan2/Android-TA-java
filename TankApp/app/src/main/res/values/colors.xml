@@ -19,5 +19,6 @@
     <color name="grey_hint_text">#808080</color>
 
     <color name="alert">#CC3333</color>
+    <color name="list_item_divider">#C1C1C1</color>
 
 </resources>

@@ -2,25 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/outerConstraintLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/background"
+    android:gravity="center"
     tools:context=".ui.jarmu_felvetel.JarmuFelvetelFragment">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/mainTitle"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/rounded_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,9 +33,9 @@
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="@string/jarmu_hozzaadas_szoveg"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:textColor="@color/black2"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -112,9 +112,10 @@
 
             <EditText
                 android:id="@+id/carNameInputField"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
                 android:autofillHints="10"
                 android:background="@drawable/input_field"
                 android:hint="@string/jarmu_nev_megadas_pelda"
