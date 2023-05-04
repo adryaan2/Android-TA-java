@@ -9,7 +9,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.tankapp.MainActivity;
 import com.example.tankapp.data.models.AutoModel;
 import com.example.tankapp.data.models.TankolasModel;
 import com.example.tankapp.data.models.TavolsagModel;
@@ -91,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d("UTOLSO", getUtolsoTankolas().toString());
 
-        Log.d("SZAMA", String.valueOf(getTankolasokSzamaAktivJarmu()));
+        Log.d("SZAMA", String.valueOf(getTankolasokSzama()));
 
         for(UzemanyagModel akt : getUzemanyagok())
             Log.d("UZEMA", akt.toString());
@@ -257,11 +256,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * @return Az aktív járműhöz tartozó tankolások száma.
-     */
-    public int getTankolasokSzamaAktivJarmu(){
-        String sql="SELECT COUNT(*) FROM Tankolasok WHERE autoId="+MainActivity.aktivJarmu.getAutoId();
+    public int getTankolasokSzama(){
+        String sql="SELECT COUNT(tankId) FROM Tankolasok";
         db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         if(cursor.moveToFirst()){
@@ -390,13 +386,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lista;
     }
 
-    /**
-     * Töröl minden tankolást és járművet.
-     */
-    public void truncate(){
-        db.execSQL("DELETE FROM Tankolasok");
-        db.execSQL("DELETE FROM Autok");
-    }
-
-    //public int
 }
