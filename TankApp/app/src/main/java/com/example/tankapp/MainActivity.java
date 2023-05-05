@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         instance=this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        deleteDatabase("TankolasKonyvelesek.db");
+        //deleteDatabase("TankolasKonyvelesek.db");
 
 
         setSupportActionBar(binding.appBarMain.toolbar);

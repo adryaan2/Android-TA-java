@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
+import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.databinding.FragmentStatsBinding;
 import com.example.tankapp.util.Stat;
 
@@ -60,6 +62,22 @@ public class StatsFragment extends Fragment {
             havontaHanyszor=binding.havontaHanyszorErtek;
             egyTankTav=binding.egyTankTavErtek;
 
+            //ha nincs tankolás jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
+            if(DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokSzama()==0){
+                atlFogy.setVisibility(View.GONE);
+                havontaHanyszor.setVisibility(View.GONE);
+                egyTankTav.setVisibility(View.GONE);
+                binding.bontasLinearL.setVisibility(View.GONE);
+                binding.divider2.setVisibility(View.GONE);
+                binding.divider3.setVisibility(View.GONE);
+                binding.utolsoDivider.setVisibility(View.GONE);
+                binding.atlFogyCim.setVisibility(View.GONE);
+                binding.havontaHanyszorCim.setVisibility(View.GONE);
+                binding.egyTankTavCim.setVisibility(View.GONE);
+
+                binding.nincsTankTxtStat.setVisibility(View.VISIBLE);
+                return;
+            }
             DecimalFormat df = new DecimalFormat("#.###");
             atlFogy.setText(df.format(stat.atlagFogy100kmen()) + " l/100km");
             egyTankTav.setText(df.format(stat.atlagUtPerTankolas()) + " km");

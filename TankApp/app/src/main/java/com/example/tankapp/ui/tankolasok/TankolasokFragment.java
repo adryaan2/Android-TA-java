@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,9 +33,23 @@ public class TankolasokFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tankolasok, container, false);
 
-        lista = DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
-
         RecyclerView recyclerView = view.findViewById(R.id.recyclerV);
+
+        //ha nincs tankolás jelenítsük meg a megfelelő szöveget és legyen vége az onCreateView()-nak
+        if(DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokSzama()==0){
+            TextView cim = view.findViewById(R.id.titleTxt);
+            LinearLayout header = view.findViewById(R.id.header);
+            TextView nincstank = view.findViewById(R.id.nincsTankTxtTankolasok);
+            recyclerView.setVisibility(View.GONE);
+            cim.setVisibility(View.GONE);
+            header.setVisibility(View.GONE);
+
+            nincstank.setVisibility(View.VISIBLE);
+            return view;
+        }
+
+
+        lista = DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
 
         RecyclerAdapter adapter = new RecyclerAdapter(lista);
 

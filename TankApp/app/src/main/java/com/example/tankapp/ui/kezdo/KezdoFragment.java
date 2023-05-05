@@ -3,6 +3,7 @@ package com.example.tankapp.ui.kezdo;
 import static com.example.tankapp.MainActivity.aktivJarmu;
 import static java.time.temporal.ChronoUnit.DAYS;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,18 +62,6 @@ public class KezdoFragment extends Fragment{
             aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
             aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
 
-           DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
-           TankolasOsszetett tankolasOsszetett = dbHelper.getTankolasokByAutoId(aktivJarmu.getAutoId()).get(0);
-           Stat stat = new Stat();
-           String megtettUt = tankolasOsszetett.xMegtettUt();
-           String tankoltMennyiseg = tankolasOsszetett.xTankoltMennyiseg();
-           String uzemanyag = tankolasOsszetett.getUzemanyag();
-           LocalDate datum = tankolasOsszetett.getDatum();
-           String egysegar = tankolasOsszetett.xEgysegar();
-           float atlagFogy = stat.atlagFogy100kmen();
-           float osszesUt = stat.osszesMegtettKm();
-
-
             TextView eltelt = (TextView) view.findViewById(R.id.eltelt_ido);
             TextView mennyiseg = (TextView) view.findViewById(R.id.uzemanyag_mennyiseg);
             TextView tipus = (TextView) view.findViewById(R.id.uzemanyag_tipus);
@@ -81,6 +70,38 @@ public class KezdoFragment extends Fragment{
 
             TextView atlag = (TextView) view.findViewById(R.id.atlagfogyasztas_text);
             TextView osszes = (TextView) view.findViewById(R.id.osszesut_text);
+
+            DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
+
+            //ha nincs tankolás jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
+            if(dbHelper.getTankolasokSzama()==0){
+                eltelt.setVisibility(View.GONE);
+                mennyiseg.setVisibility(View.GONE);
+                tipus.setVisibility(View.GONE);
+                ar.setVisibility(View.GONE);
+                utan.setVisibility(View.GONE);
+                atlag.setVisibility(View.GONE);
+                osszes.setVisibility(View.GONE);
+                TextView osszesut = (TextView) view.findViewById(R.id.osszesut);
+                osszesut.setVisibility(View.GONE);
+                TextView atlagfogy = (TextView) view.findViewById(R.id.atlagfogyasztas);
+                atlagfogy.setVisibility(View.GONE);
+                TextView cim = view.findViewById(R.id.utolsoTankCimTxt);
+                cim.setVisibility(View.GONE);
+                
+                TextView nincsTank = view.findViewById(R.id.nincsTankTxt);
+                nincsTank.setVisibility(View.VISIBLE);
+                return;
+            }
+            TankolasOsszetett tankolasOsszetett = dbHelper.getTankolasokByAutoId(aktivJarmu.getAutoId()).get(0);
+            Stat stat = new Stat();
+            String megtettUt = tankolasOsszetett.xMegtettUt();
+            String tankoltMennyiseg = tankolasOsszetett.xTankoltMennyiseg();
+            String uzemanyag = tankolasOsszetett.getUzemanyag();
+            LocalDate datum = tankolasOsszetett.getDatum();
+            String egysegar = tankolasOsszetett.xEgysegar();
+            float atlagFogy = stat.atlagFogy100kmen();
+            float osszesUt = stat.osszesMegtettKm();
 
             eltelt.setText(DAYS.between(datum, LocalDate.now())+" napja");
             mennyiseg.setText(tankoltMennyiseg);
