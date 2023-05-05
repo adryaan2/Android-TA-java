@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -56,7 +57,7 @@ public class JarmuFelvetelFragment extends Fragment {
 
         hozzaadBtn.setOnClickListener(v->{
             DatabaseHelper dh = DatabaseHelper.getInstance(MainActivity.getContext());
-            String rendsz = rendszEdit.getText().toString().trim();
+            String rendsz = rendszEdit.getText().toString().trim().toUpperCase();
             String megj = megjEdit.getText().toString();
             if(rendsz.length()<7){
                 rendszHibaTxt.setVisibility(View.VISIBLE);
@@ -64,9 +65,14 @@ public class JarmuFelvetelFragment extends Fragment {
             }
             Log.d("uj_rendsz: ",rendsz);
             Log.d("uj_megj: ",megj);
-            dh.addAutok(rendsz, megj);
-            Toast.makeText(getContext(), "Jármű hozzáadva",Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_jarmuvek);
+            try {
+                dh.addAutok(rendsz, megj);
+                Toast.makeText(getContext(), "Jármű hozzáadva",Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_jarmuvek);
+            }
+            catch (SQLiteConstraintException e) {
+                Toast.makeText(getContext(), "Ilyen rendszámú jármű már létezik!", Toast.LENGTH_SHORT).show();
+            }
         });
 
         return root;
