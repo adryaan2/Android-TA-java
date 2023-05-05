@@ -34,6 +34,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class TankolasFelvetelFragment extends Fragment {
     private FragmentTankolasFelvetelBinding binding;
@@ -119,6 +120,10 @@ public class TankolasFelvetelFragment extends Fragment {
                  */
                 DatePickerDialog dialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog, dateSetListener,year,month,day);
                 dialog.show();
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                /**
+                 * a jelenlegi napnál későbbi dátumok kiválasztásának "tiltása"
+                 * */
             }
         });
 
