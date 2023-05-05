@@ -79,7 +79,8 @@
     <string name="tankolasok_havi_bontas_title">Tankolások száma havonta</string>
     <string name="tankolasok_heti_bontas_title">Tankolások száma hetente</string>
     <string name="no_refueling_yet_hint">Majd itt jelennek meg az utolsó tankolás adatai és néhány statisztika.\nA kiválasztott járműhöz még\nnem tartozik tankolás.\nFelvehet egyet a jobb felső gombbal.</string>
-    <string name="no_refueling_yet_hint_stat">Majd itt jelennek meg\na kiválasztott járműre vonatkozó statisztikák.\nMég nem rögzített tankolást\na kiválasztott járműhöz.\nA Kezdőlapon, a Tankolások,\nilletve az Új tankolás\nmenüpontokban vehet fel egyet.</string>
-    <string name="no_refueling_yet_hint_tankolasok">Majd itt jelenik meg a kiválasztott jármű\nösszes tankolásának minden adata.\nMég nem rögzített tankolást\na kiválasztott járműhöz.\nA Kezdőlapon, a Tankolások,\nilletve az Új tankolás\nmenüpontokban vehet fel egyet.</string>
+    <string name="no_refueling_yet_hint_stat">Majd itt jelennek meg\na kiválasztott járműre vonatkozó statisztikák.\nMég nem rögzített tankolást\na kiválasztott járműhöz.\nA Kezdőlap, illetve a Tankolások\noldalakon keresztül vehet fel egyet.</string>
+    <string name="no_refueling_yet_hint_tankolasok">Majd itt jelenik meg a kiválasztott jármű\nösszes tankolásának minden adata.\nMég nem rögzített tankolást\na kiválasztott járműhöz.\nFelvehet egyet a jobb felső gombbal.</string>
+    <string name="no_vehicle_yet_hint">A kezdéshez vegyen fel\negy járművet az adatbankba.\nEzt az alsó sávra koppintva teheti meg.</string>
 
 </resources>

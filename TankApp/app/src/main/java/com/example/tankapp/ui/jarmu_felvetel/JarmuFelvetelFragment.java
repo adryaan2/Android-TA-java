@@ -66,9 +66,14 @@ public class JarmuFelvetelFragment extends Fragment {
             Log.d("uj_rendsz: ",rendsz);
             Log.d("uj_megj: ",megj);
             try {
+                int autokSzama = dh.getJarmuvekSzama();
                 dh.addAutok(rendsz, megj);
+                if(autokSzama==0){
+                    MainActivity.aktivJarmu=dh.getAutok().get(0);
+                    Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_kezdo2);
+                } else Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_jarmuvek);
+
                 Toast.makeText(getContext(), "Jármű hozzáadva",Toast.LENGTH_SHORT).show();
-                Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_jarmuvek);
             }
             catch (SQLiteConstraintException e) {
                 Toast.makeText(getContext(), "Ilyen rendszámú jármű már létezik!", Toast.LENGTH_SHORT).show();

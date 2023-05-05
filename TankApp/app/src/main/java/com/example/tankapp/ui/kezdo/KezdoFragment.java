@@ -56,11 +56,7 @@ public class KezdoFragment extends Fragment{
         if (view != null) {
             //új tankolás gomb navigáljon a felületre
             Button ujTankolasBtn = view.getRootView().findViewById(R.id.ujTankolasBtn);
-            ujTankolasBtn.setOnClickListener(v->NavHostFragment.findNavController(this).navigate(R.id. action_nav_kezdo_to_nav_tankolasFelvetel));
-
             Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
-            aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
-            aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
 
             TextView eltelt = (TextView) view.findViewById(R.id.eltelt_ido);
             TextView mennyiseg = (TextView) view.findViewById(R.id.uzemanyag_mennyiseg);
@@ -71,8 +67,32 @@ public class KezdoFragment extends Fragment{
             TextView atlag = (TextView) view.findViewById(R.id.atlagfogyasztas_text);
             TextView osszes = (TextView) view.findViewById(R.id.osszesut_text);
 
+            aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
             DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
 
+            //ha nincs jármű jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
+            if(dbHelper.getJarmuvekSzama()==0){
+                eltelt.setVisibility(View.GONE);
+                mennyiseg.setVisibility(View.GONE);
+                tipus.setVisibility(View.GONE);
+                ar.setVisibility(View.GONE);
+                utan.setVisibility(View.GONE);
+                atlag.setVisibility(View.GONE);
+                osszes.setVisibility(View.GONE);
+                TextView osszesut = (TextView) view.findViewById(R.id.osszesut);
+                osszesut.setVisibility(View.GONE);
+                TextView atlagfogy = (TextView) view.findViewById(R.id.atlagfogyasztas);
+                atlagfogy.setVisibility(View.GONE);
+                TextView cim = view.findViewById(R.id.utolsoTankCimTxt);
+                cim.setVisibility(View.GONE);
+                ujTankolasBtn.setVisibility(View.GONE);
+
+                binding.nincsAutoTxtKezdo.setVisibility(View.VISIBLE);
+                aktJarmuBtn.setText("Járművek oldal");
+                return;
+            }
+
+            ujTankolasBtn.setOnClickListener(v->NavHostFragment.findNavController(this).navigate(R.id. action_nav_kezdo_to_nav_tankolasFelvetel));
             //ha nincs tankolás jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
             if(dbHelper.getTankolasokSzama()==0){
                 eltelt.setVisibility(View.GONE);
@@ -88,6 +108,8 @@ public class KezdoFragment extends Fragment{
                 atlagfogy.setVisibility(View.GONE);
                 TextView cim = view.findViewById(R.id.utolsoTankCimTxt);
                 cim.setVisibility(View.GONE);
+
+                aktJarmuBtn.setText("Jelenlegi jármű: "+aktivJarmu.getRendszam());
                 
                 TextView nincsTank = view.findViewById(R.id.nincsTankTxt);
                 nincsTank.setVisibility(View.VISIBLE);

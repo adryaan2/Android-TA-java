@@ -28,35 +28,12 @@ public class TankolasokFragment extends Fragment {
 
     ArrayList<TankolasOsszetett> lista;
 
+    private DatabaseHelper dbh;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tankolasok, container, false);
-
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerV);
-
-        //ha nincs tankolás jelenítsük meg a megfelelő szöveget és legyen vége az onCreateView()-nak
-        if(DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokSzama()==0){
-            TextView cim = view.findViewById(R.id.titleTxt);
-            LinearLayout header = view.findViewById(R.id.header);
-            TextView nincstank = view.findViewById(R.id.nincsTankTxtTankolasok);
-            recyclerView.setVisibility(View.GONE);
-            cim.setVisibility(View.GONE);
-            header.setVisibility(View.GONE);
-
-            nincstank.setVisibility(View.VISIBLE);
-            return view;
-        }
-
-
-        lista = DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
-
-        RecyclerAdapter adapter = new RecyclerAdapter(lista);
-
-        RecyclerView.LayoutManager layoutManager =
-                new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
 
         return view;
     }
@@ -64,16 +41,49 @@ public class TankolasokFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        MainActivity.getContext().showUjtankolasBtn();
+        dbh=DatabaseHelper.getInstance(MainActivity.getContext());
         View view = getView();
         if(view != null){
+            RecyclerView recyclerView = view.findViewById(R.id.recyclerV);
+            TextView cim = view.findViewById(R.id.titleTxt);
+            LinearLayout header = view.findViewById(R.id.header);
+
+            Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
+            aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_tankolasok_to_nav_jarmuvek));
+            //ha nincs jármű jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
+            if(dbh.getJarmuvekSzama()==0){
+                recyclerView.setVisibility(View.GONE);
+                cim.setVisibility(View.GONE);
+                header.setVisibility(View.GONE);
+                TextView nincsauto = view.findViewById(R.id.nincsAutoTxtTankolasok);
+                nincsauto.setVisibility(View.VISIBLE);
+                MainActivity.getContext().hideUjtankolasBtn();
+                aktJarmuBtn.setText("Járművek oldal");
+                return;
+            }
             //új tankolás gomb navigáljon a felületre
             Button ujTankolasBtn = view.getRootView().findViewById(R.id.ujTankolasBtn);
             ujTankolasBtn.setOnClickListener(v-> NavHostFragment.findNavController(this).navigate(R.id. action_nav_tankolasok_to_nav_tankolasFelvetel));
-
-            Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
+            MainActivity.getContext().showUjtankolasBtn();
             aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
-            aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_tankolasok_to_nav_jarmuvek));
+            //ha nincs tankolás jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
+            if(dbh.getTankolasokSzama()==0){
+                recyclerView.setVisibility(View.GONE);
+                cim.setVisibility(View.GONE);
+                header.setVisibility(View.GONE);
+                TextView nincstank = view.findViewById(R.id.nincsTankTxtTankolasok);
+                nincstank.setVisibility(View.VISIBLE);
+                return;
+            }
+
+            lista = dbh.getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
+
+            RecyclerAdapter adapter = new RecyclerAdapter(lista);
+
+            RecyclerView.LayoutManager layoutManager =
+                    new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
         }
     }
 }

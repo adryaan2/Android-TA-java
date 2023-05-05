@@ -72,6 +72,11 @@
             app:destination="@id/nav_jarmuvek"
             app:popUpTo="@id/nav_jarmuvek"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_jarmuFelvetelFragment_to_nav_kezdo2"
+            app:destination="@id/nav_kezdo"
+            app:popUpTo="@id/nav_kezdo"
+            app:popUpToInclusive="true" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"

@@ -45,26 +45,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Uzemanyagok (uzemanyagId INTEGER PRIMARY KEY AUTOINCREMENT, megnev TEXT)"); //benzin, diesel
         db.execSQL("CREATE TABLE Tankolasok (tankId INTEGER PRIMARY KEY AUTOINCREMENT, datum INTEGER, autoId INTEGER, megtett_tav INTEGER, tavolsagId INTEGER, ar FLOAT, valutaId INTEGER, menny FLOAT, uzemanyagId INTEGER, urmertekId INTEGER, FOREIGN KEY (autoId) REFERENCES Autok(autoId), FOREIGN KEY (tavolsagId) REFERENCES Tavolsagok(id), FOREIGN KEY (valutaId) REFERENCES Valutak(id), FOREIGN KEY (uzemanyagId) REFERENCES Uzemanyagok(uzemanyagId), FOREIGN KEY (urmertekId) REFERENCES Urmertekek(id) )");
 
-        this.db = db;
-        feltolt();
+        DatabaseHelper.db = db;
+        init();
+        //feltolt();
     }
 
     private void feltolt(){
         addAutok("ABC-123", "szürke");
         addAutok("DEF-456", "kék");
-
-        addValutak("HUF");
-        addValutak("USD");
-
-        addUrmertekek("liter");
-        addUrmertekek("gallon");
-
-        addTavolsagok("km");
-        addTavolsagok("mf");
-
-        addUzemanyagok("benzin");
-        addUzemanyagok("diesel");
-
 
         addTankolasok(LocalDate.of(2023,4,18).toEpochDay(), 2, 150, 2, 20, 2, 23,1, 1);
         addTankolasok(LocalDate.of(2023,4,2).toEpochDay(), 2, 276, 1, 2000, 1, 18,1, 1);
@@ -76,7 +64,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
         addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
         addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
+    }
 
+    private void init(){
+        addValutak("HUF");
+        addValutak("USD");
+
+        addUrmertekek("liter");
+        addUrmertekek("gallon");
+
+        addTavolsagok("km");
+        addTavolsagok("mf");
+
+        addUzemanyagok("benzin");
+        addUzemanyagok("diesel");
     }
 
     public void dbTest(){
@@ -107,6 +108,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         for(TankolasOsszetett akt : getTankolasokByAutoId(2))
             Log.d("byID", akt.toString());
+
+        Log.d("AUTOK_SZAMA", String.valueOf(getJarmuvekSzama()));
     }
 
 
@@ -388,6 +391,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return lista;
+    }
+
+    public int getJarmuvekSzama(){
+        String sql="SELECT COUNT(*) FROM Autok";
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToFirst()){
+            int x = cursor.getInt(0);
+            cursor.close();
+            return x;
+        }else{
+            cursor.close();
+            return -1;
+        }
     }
 
 }

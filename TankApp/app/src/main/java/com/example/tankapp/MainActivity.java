@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static AutoModel aktivJarmu;
 
+    private DatabaseHelper dbh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +52,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        dbh =DatabaseHelper.getInstance(getContext());
+        if(dbh.getJarmuvekSzama()==0){
+            aktivJarmu=null;
+        }else {
+            aktivJarmu = dbh.getAutok().get(0);
+            //MAJD KIVENNI----------------------------------------------
+            Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
+        }
 
-        aktivJarmu=DatabaseHelper.getInstance(getContext())
-                .getAutok().get(0);
-        //MAJD KIVENNI----------------------------------------------
-        Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
-
-        DatabaseHelper.getInstance(MainActivity.getContext()).dbTest();
+        //dbh.dbTest();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
