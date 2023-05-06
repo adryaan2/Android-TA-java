@@ -214,7 +214,7 @@ public class TankolasFelvetelFragment extends Fragment {
 
                 if (hozzaadhatoE) {
                     DatabaseHelper.getInstance(MainActivity.getContext()).addTankolasok(date.toEpochDay(), MainActivity.aktivJarmu.getAutoId(), Integer.parseInt(String.valueOf(txt_tavolsag.getText())), (int)tavolsagSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagEgysegar.getText())), (int)valutaSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagMennyiseg.getText())), (int)uzemanyagSpinner.getSelectedItemId() + 1, (int)urmertekSpinner.getSelectedItemId() + 1);
-                    Navigation.findNavController(view).navigate(R.id.nav_kezdo);
+                    Navigation.findNavController(view).navigate(R.id.action_nav_tankolasFelvetel_to_nav_kezdo);
                 }
             }
         });
