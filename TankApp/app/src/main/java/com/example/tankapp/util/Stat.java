@@ -77,13 +77,7 @@ public class Stat extends DatabaseHelper {
      * @return Az aktivJarmu egy tankolása átlagosan ennyi kilométer megtételére elég
      */
     public float atlagUtPerTankolas(){
-        int tankolasokSzama;
-        String sql = "SELECT COUNT(*) FROM Tankolasok WHERE autoId="+MainActivity.aktivJarmu.getAutoId();
-        Cursor cursor = db.rawQuery(sql,null);
-        cursor.moveToFirst();
-        tankolasokSzama = cursor.getInt(0);
-        cursor.close();
-        return osszesMegtettKm()/tankolasokSzama;
+        return osszesMegtettKm()/getTankolasokSzama();
     }
 
     public ArrayList<TankolasokSzamaBontasban> tankolasokSzamaHavonta(){
