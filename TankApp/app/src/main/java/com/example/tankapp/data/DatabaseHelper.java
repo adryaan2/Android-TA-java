@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         DatabaseHelper.db = db;
         init();
-        //feltolt();
+        feltolt();
     }
 
     private void feltolt(){
@@ -405,6 +405,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
             return -1;
         }
+    }
+
+    public void kiurit(){
+        db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM Tankolasok");
+        db.execSQL("DELETE FROM Autok");
     }
 
 }
