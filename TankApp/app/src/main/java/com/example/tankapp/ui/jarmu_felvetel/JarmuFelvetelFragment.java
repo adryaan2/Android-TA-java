@@ -66,9 +66,18 @@ public class JarmuFelvetelFragment extends Fragment {
             Log.d("uj_rendsz: ",rendsz);
             Log.d("uj_megj: ",megj);
             try {
+                int autokSzama = dh.getJarmuvekSzama();
                 dh.addAutok(rendsz, megj);
+                /**
+                 * Ha ez az első autó amit felvesznek, állítsuk be erre az aktivJarmu változót
+                 * és ne az autók listájára, hanem a kezőoldalra navigáljunk.
+                 */
+                if(autokSzama==0){
+                    MainActivity.aktivJarmu=dh.getAutok().get(0);
+                    Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_kezdo2);
+                } else Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_jarmuvek);
+
                 Toast.makeText(getContext(), "Jármű hozzáadva",Toast.LENGTH_SHORT).show();
-                Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_jarmuvek);
             }
             catch (SQLiteConstraintException e) {
                 Toast.makeText(getContext(), "Ilyen rendszámú jármű már létezik!", Toast.LENGTH_SHORT).show();

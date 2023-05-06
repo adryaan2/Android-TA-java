@@ -51,9 +51,9 @@ public class StatsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         View view = getView();
+        DatabaseHelper dbh = DatabaseHelper.getInstance(MainActivity.getContext());
         if(view != null){
             Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
-            aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
             aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_stats_to_nav_jarmuvek));
 
             stat = new Stat();
@@ -62,8 +62,26 @@ public class StatsFragment extends Fragment {
             havontaHanyszor=binding.havontaHanyszorErtek;
             egyTankTav=binding.egyTankTavErtek;
 
+            //ha nincs jármű jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
+            if(dbh.getJarmuvekSzama()==0){
+                atlFogy.setVisibility(View.GONE);
+                havontaHanyszor.setVisibility(View.GONE);
+                egyTankTav.setVisibility(View.GONE);
+                binding.bontasLinearL.setVisibility(View.GONE);
+                binding.divider2.setVisibility(View.GONE);
+                binding.divider3.setVisibility(View.GONE);
+                binding.utolsoDivider.setVisibility(View.GONE);
+                binding.atlFogyCim.setVisibility(View.GONE);
+                binding.havontaHanyszorCim.setVisibility(View.GONE);
+                binding.egyTankTavCim.setVisibility(View.GONE);
+
+                binding.nincsAutoTxtStat.setVisibility(View.VISIBLE);
+                aktJarmuBtn.setText("Járművek oldal");
+                return;
+            }
+            aktJarmuBtn.setText("Jelenlegi jármű: "+ aktivJarmu.getRendszam());
             //ha nincs tankolás jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
-            if(DatabaseHelper.getInstance(MainActivity.getContext()).getTankolasokSzama()==0){
+            if(dbh.getTankolasokSzama()==0){
                 atlFogy.setVisibility(View.GONE);
                 havontaHanyszor.setVisibility(View.GONE);
                 egyTankTav.setVisibility(View.GONE);
