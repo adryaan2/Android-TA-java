@@ -68,6 +68,10 @@ public class JarmuFelvetelFragment extends Fragment {
             try {
                 int autokSzama = dh.getJarmuvekSzama();
                 dh.addAutok(rendsz, megj);
+                /**
+                 * Ha ez az első autó amit felvesznek, állítsuk be erre az aktivJarmu változót
+                 * és ne az autók listájára, hanem a kezőoldalra navigáljunk.
+                 */
                 if(autokSzama==0){
                     MainActivity.aktivJarmu=dh.getAutok().get(0);
                     Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_kezdo2);

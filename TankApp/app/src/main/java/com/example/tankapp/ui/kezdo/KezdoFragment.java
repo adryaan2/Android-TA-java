@@ -93,6 +93,7 @@ public class KezdoFragment extends Fragment{
             }
 
             ujTankolasBtn.setOnClickListener(v->NavHostFragment.findNavController(this).navigate(R.id. action_nav_kezdo_to_nav_tankolasFelvetel));
+            aktJarmuBtn.setText("Jelenlegi jármű: "+aktivJarmu.getRendszam());
             //ha nincs tankolás jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
             if(dbHelper.getTankolasokSzama()==0){
                 eltelt.setVisibility(View.GONE);
@@ -109,8 +110,6 @@ public class KezdoFragment extends Fragment{
                 TextView cim = view.findViewById(R.id.utolsoTankCimTxt);
                 cim.setVisibility(View.GONE);
 
-                aktJarmuBtn.setText("Jelenlegi jármű: "+aktivJarmu.getRendszam());
-                
                 TextView nincsTank = view.findViewById(R.id.nincsTankTxt);
                 nincsTank.setVisibility(View.VISIBLE);
                 return;
