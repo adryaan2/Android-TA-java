@@ -17,17 +17,26 @@ import com.example.tankapp.data.models.UrmertekModel;
 import com.example.tankapp.data.models.UzemanyagModel;
 import com.example.tankapp.data.models.ValutaModel;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "TankolasKonyvelesek.db";
+    public static final String DEFAULT_DBNAME = "TankolasKonyvelesek.db";
     protected static SQLiteDatabase db;
     private static DatabaseHelper singleton;
 
     protected DatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DEFAULT_DBNAME, null, 1);
+    }
+    private DatabaseHelper(String dbName) {
+        super(MainActivity.getContext(), dbName, null, 1);
     }
 
     public static DatabaseHelper getInstance(Context context){
@@ -48,6 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper.db = db;
         init();
         feltolt();
+        Log.d("ujdb",this.getDatabaseName());
     }
 
     private void feltolt(){
@@ -412,5 +422,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM Tankolasok");
         db.execSQL("DELETE FROM Autok");
     }
+
+    public void exportDb(String dbNev){
+        File aktDb = new File(getReadableDatabase().getPath());
+
+        Log.d("DB_PATH",getReadableDatabase().getPath());
+        File ujDb = new File(aktDb.getParentFile(),dbNev+".db");
+        try{
+            copyFile(aktDb, ujDb);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.kiurit();
+        this.close();
+        singleton = new DatabaseHelper(dbNev);
+
+    }
+
+    public static void copyFile(File src, File dst) throws IOException {
+        try (InputStream in = new FileInputStream(src)) {
+            try (OutputStream out = new FileOutputStream(dst)) {
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            }
+        }
+    }
+
+    public String getDatabaseName(){return this.getDatabaseName();}
 
 }
