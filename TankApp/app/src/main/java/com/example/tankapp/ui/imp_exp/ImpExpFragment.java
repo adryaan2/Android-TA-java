@@ -68,6 +68,13 @@ public class ImpExpFragment extends Fragment {
     private void exportClick(View v){
         View inputView = LayoutInflater.from(v.getContext()).inflate(R.layout.dialog_edittext,null);
         EditText input = inputView.findViewById(R.id.editText);
+        if(dbManager.getDbHelper().getJarmuvekSzama()==0){
+            new AlertDialog.Builder(v.getContext())
+                    .setTitle("Nincs mit menteni ebben az adatbázisban")
+                    .setPositiveButton("Értettem", null)
+                    .show();
+            return;
+        }
         new AlertDialog.Builder(v.getContext())
                 .setTitle("Adja meg, milyen néven legyen mentve az adatbank!")
                 .setMessage("Nem tartalmazhat pontot")
