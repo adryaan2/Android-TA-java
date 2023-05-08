@@ -45,7 +45,6 @@ public class ImpExpFragment extends Fragment {
         torolBtn = binding.torlesBtn;
         aktDbTxt = binding.aktDbHint;
         dbh = DatabaseHelper.getInstance(MainActivity.getContext());
-        Log.d("akt_db",dbh.getDatabaseName());
         return root;
     }
 
@@ -80,6 +79,8 @@ public class ImpExpFragment extends Fragment {
                     else{
                         dbh.exportDb(be);
                         Toast.makeText(v.getContext(),be,Toast.LENGTH_SHORT).show();
+                        ///  Felső kiírást frissíteni!
+                        aktDbTxt.setText(DatabaseHelper.getInstance(MainActivity.getContext()).getDatabaseName());
                     }
                 })
                 .show();

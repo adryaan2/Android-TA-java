@@ -57,7 +57,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper.db = db;
         init();
         feltolt();
-        Log.d("ujdb",this.getDatabaseName());
     }
 
     private void feltolt(){
@@ -433,9 +432,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.kiurit();
-        this.close();
-        singleton = new DatabaseHelper(dbNev);
 
     }
 
@@ -452,6 +448,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public String getDatabaseName(){return this.getDatabaseName();}
+    public String getDatabaseName(){return db.getPath().substring(db.getPath().lastIndexOf('/')+1);}
 
 }
