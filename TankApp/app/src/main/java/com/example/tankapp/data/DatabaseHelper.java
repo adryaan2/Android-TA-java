@@ -29,20 +29,14 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DEFAULT_DBNAME = "TankolasKonyvelesek.db";
-    protected static SQLiteDatabase db;
-    private static DatabaseHelper singleton;
+    protected SQLiteDatabase db;
 
-    protected DatabaseHelper(@Nullable Context context) {
-        super(context, DEFAULT_DBNAME, null, 1);
+    public DatabaseHelper() {
+        super(MainActivity.getContext(), DEFAULT_DBNAME, null, 1);
     }
-    private DatabaseHelper(String dbName) {
+    public DatabaseHelper(String dbName) {
         super(MainActivity.getContext(), dbName, null, 1);
-    }
-
-    public static DatabaseHelper getInstance(Context context){
-        if(singleton==null)
-            singleton = new DatabaseHelper(context);
-        return singleton;
+        db = this.getWritableDatabase();
     }
 
     @Override
@@ -54,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Uzemanyagok (uzemanyagId INTEGER PRIMARY KEY AUTOINCREMENT, megnev TEXT)"); //benzin, diesel
         db.execSQL("CREATE TABLE Tankolasok (tankId INTEGER PRIMARY KEY AUTOINCREMENT, datum INTEGER, autoId INTEGER, megtett_tav INTEGER, tavolsagId INTEGER, ar FLOAT, valutaId INTEGER, menny FLOAT, uzemanyagId INTEGER, urmertekId INTEGER, FOREIGN KEY (autoId) REFERENCES Autok(autoId), FOREIGN KEY (tavolsagId) REFERENCES Tavolsagok(id), FOREIGN KEY (valutaId) REFERENCES Valutak(id), FOREIGN KEY (uzemanyagId) REFERENCES Uzemanyagok(uzemanyagId), FOREIGN KEY (urmertekId) REFERENCES Urmertekek(id) )");
 
-        DatabaseHelper.db = db;
+        this.db = db;
         init();
         feltolt();
     }
@@ -448,6 +442,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public String getDatabaseName(){return db.getPath().substring(db.getPath().lastIndexOf('/')+1);}
+    public String getDatabaseName(){return this.getReadableDatabase().getPath().substring(db.getPath().lastIndexOf('/')+1);}
+
+    public String getDbDirectory(){
+        return db.getPath().substring(0,this.getReadableDatabase().getPath().lastIndexOf('/')+1);
+    }
 
 }

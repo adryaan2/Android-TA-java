@@ -20,6 +20,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.data.TankolasOsszetett;
 import com.example.tankapp.databinding.FragmentKezdoBinding;
 import com.example.tankapp.util.Stat;
@@ -68,7 +69,7 @@ public class KezdoFragment extends Fragment{
             TextView osszes = (TextView) view.findViewById(R.id.osszesut_text);
 
             aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
-            DatabaseHelper dbHelper = DatabaseHelper.getInstance(MainActivity.getContext());
+            DatabaseHelper dbHelper = DbManager.getInstance().getDbHelper();
 
             //ha nincs jármű jelenítsük meg a megfelelő szöveget és legyen vége az onStart()-nak
             if(dbHelper.getJarmuvekSzama()==0){

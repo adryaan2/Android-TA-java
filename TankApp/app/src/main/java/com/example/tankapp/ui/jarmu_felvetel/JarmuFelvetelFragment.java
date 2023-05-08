@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.databinding.FragmentJarmuFelvetelBinding;
 import com.example.tankapp.databinding.FragmentTankolasFelvetelBinding;
 
@@ -56,7 +57,7 @@ public class JarmuFelvetelFragment extends Fragment {
         megjHibaTxt = root.findViewById(R.id.carNameAlertText);
 
         hozzaadBtn.setOnClickListener(v->{
-            DatabaseHelper dh = DatabaseHelper.getInstance(MainActivity.getContext());
+            DatabaseHelper dh = DbManager.getInstance().getDbHelper();
             String rendsz = rendszEdit.getText().toString().trim().toUpperCase();
             String megj = megjEdit.getText().toString();
             if(rendsz.length()<7){

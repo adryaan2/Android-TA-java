@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.data.models.TavolsagModel;
 import com.example.tankapp.data.models.UrmertekModel;
 import com.example.tankapp.data.models.UzemanyagModel;
@@ -63,10 +64,10 @@ public class TankolasFelvetelFragment extends Fragment {
         /**
          * Spinnerek feltöltése.
          */
-        ArrayList<TavolsagModel> tavolsagModels = DatabaseHelper.getInstance(MainActivity.getContext()).getTavolsagok();
-        ArrayList<UzemanyagModel> uzemanyagModels = DatabaseHelper.getInstance(MainActivity.getContext()).getUzemanyagok();
-        ArrayList<UrmertekModel> urmertekModels = DatabaseHelper.getInstance(MainActivity.getContext()).getUrmertekek();
-        ArrayList<ValutaModel> valutaModels = DatabaseHelper.getInstance(MainActivity.getContext()).getValutak();
+        ArrayList<TavolsagModel> tavolsagModels = DbManager.getInstance().getDbHelper().getTavolsagok();
+        ArrayList<UzemanyagModel> uzemanyagModels = DbManager.getInstance().getDbHelper().getUzemanyagok();
+        ArrayList<UrmertekModel> urmertekModels = DbManager.getInstance().getDbHelper().getUrmertekek();
+        ArrayList<ValutaModel> valutaModels = DbManager.getInstance().getDbHelper().getValutak();
         ArrayList<String> tavolsagElemek = new ArrayList<>();
         ArrayList<String> uzemanyagElemek = new ArrayList<>();
         ArrayList<String> urmertekElemek = new ArrayList<>();
@@ -213,7 +214,7 @@ public class TankolasFelvetelFragment extends Fragment {
                 }
 
                 if (hozzaadhatoE) {
-                    DatabaseHelper.getInstance(MainActivity.getContext()).addTankolasok(date.toEpochDay(), MainActivity.aktivJarmu.getAutoId(), Integer.parseInt(String.valueOf(txt_tavolsag.getText())), (int)tavolsagSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagEgysegar.getText())), (int)valutaSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagMennyiseg.getText())), (int)uzemanyagSpinner.getSelectedItemId() + 1, (int)urmertekSpinner.getSelectedItemId() + 1);
+                    DbManager.getInstance().getDbHelper().addTankolasok(date.toEpochDay(), MainActivity.aktivJarmu.getAutoId(), Integer.parseInt(String.valueOf(txt_tavolsag.getText())), (int)tavolsagSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagEgysegar.getText())), (int)valutaSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagMennyiseg.getText())), (int)uzemanyagSpinner.getSelectedItemId() + 1, (int)urmertekSpinner.getSelectedItemId() + 1);
                     Navigation.findNavController(view).navigate(R.id.action_nav_tankolasFelvetel_to_nav_kezdo);
                 }
             }

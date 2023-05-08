@@ -1,8 +1,6 @@
 package com.example.tankapp.ui.imp_exp;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +16,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
-import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.databinding.FragmentImpExpBinding;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Objects;
 
 public class ImpExpFragment extends Fragment {
     private FragmentImpExpBinding binding;
@@ -29,7 +28,7 @@ public class ImpExpFragment extends Fragment {
     private Button torolBtn;
     private TextView aktDbTxt;
 
-    private DatabaseHelper dbh;
+    private DbManager dbManager;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,15 +43,17 @@ public class ImpExpFragment extends Fragment {
         expBtn = binding.exportBtn;
         torolBtn = binding.torlesBtn;
         aktDbTxt = binding.aktDbHint;
-        dbh = DatabaseHelper.getInstance(MainActivity.getContext());
+        dbManager = DbManager.getInstance();
         return root;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
         torolBtn.setOnClickListener(v->torlesClick(v));
         expBtn.setOnClickListener(v->exportClick(v));
+        refreshUi();
     }
 
     private void torlesClick(View v){
@@ -60,7 +61,7 @@ public class ImpExpFragment extends Fragment {
                 .setTitle("Törlés")
                 .setMessage("Az összes jármű és tankolás törlődik az adatbankból. Folytatja?")
                 .setNegativeButton("Mégse", null ) //TESZTELD LEEE
-                .setPositiveButton("Megerősít", (dialog, id)->dbh.kiurit())
+                .setPositiveButton("Megerősít", (dialog, id)-> dbManager.getDbHelper().kiurit())
                 .show();
     }
 
@@ -76,15 +77,28 @@ public class ImpExpFragment extends Fragment {
                     String be= String.valueOf(input.getText());
                     if(be.contains(".") || be.length()==0)
                         Toast.makeText(v.getContext(),"Helytelen név",Toast.LENGTH_SHORT).show();
+                    else if(be.equals(DbManager.DEFAULT_DBNAME.substring(0,DbManager.DEFAULT_DBNAME.indexOf('.'))))
+                        Toast.makeText(v.getContext(),"Ezt a nevet nem használhatja",Toast.LENGTH_SHORT).show();
                     else{
-                        dbh.exportDb(be);
+                        dbManager.exportDb(be);
                         Toast.makeText(v.getContext(),be,Toast.LENGTH_SHORT).show();
                         ///  Felső kiírást frissíteni!
-                        aktDbTxt.setText(DatabaseHelper.getInstance(MainActivity.getContext()).getDatabaseName());
+                        refreshUi();
                     }
                 })
                 .show();
 
+    }
+
+    /**
+     * felület változásai annak függvényében, hogy mentett adatbázis van-e megnyitva
+     */
+    private void refreshUi(){
+        String aktDb = dbManager.currentDbName();
+        if(Objects.equals(aktDb, DbManager.DEFAULT_DBNAME))
+            aktDbTxt.setText(R.string.unsaved_db_hint);
+        else
+            aktDbTxt.setText(getString(R.string.saved_db_hint)+" "+aktDb.substring(0,aktDb.indexOf('.')));
     }
 
     @Override
