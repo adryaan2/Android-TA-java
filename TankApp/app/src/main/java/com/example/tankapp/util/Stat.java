@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.data.TankolasOsszetett;
 import com.example.tankapp.ui.stats.TankolasokSzamaBontasban;
 
@@ -21,9 +22,10 @@ import java.util.Objects;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
-public class Stat extends DatabaseHelper {
+public class Stat {
+    private DatabaseHelper dbh;
     public Stat(){
-        super(MainActivity.getContext());
+        dbh= DbManager.getInstance().getDbHelper();
     }
     public float kmToMiles(float km){return km*0.62137f;}
     public float milesToKm(float mi){return mi*1.60934f;}
@@ -34,7 +36,7 @@ public class Stat extends DatabaseHelper {
      * @return liter/100km
      */
     public float atlagFogy100kmen(){
-        ArrayList<TankolasOsszetett> osszes = getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
+        ArrayList<TankolasOsszetett> osszes = dbh.getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
         float osszL=0;
         for(TankolasOsszetett akt : osszes){
             if(Objects.equals(akt.getUrmertek(), "liter")) osszL+= akt.getMenny();
@@ -44,7 +46,7 @@ public class Stat extends DatabaseHelper {
     }
 
     public float osszesMegtettKm(){
-        ArrayList<TankolasOsszetett> osszes = getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
+        ArrayList<TankolasOsszetett> osszes = dbh.getTankolasokByAutoId(MainActivity.aktivJarmu.getAutoId());
         float osszKm=0;
         for(TankolasOsszetett akt : osszes){
             if(Objects.equals(akt.getTavolsagEgyseg(), "km")) osszKm+=akt.getMegtett_tav();
@@ -57,7 +59,7 @@ public class Stat extends DatabaseHelper {
      * @return Az aktivJarmu-nek átlagosan hány tankolása van egy hónapban
      */
     public double haviAtlagTankolasok(){
-        List<LocalDate> datumLista = getDatumokByAutoId(MainActivity.aktivJarmu.getAutoId());
+        List<LocalDate> datumLista = dbh.getDatumokByAutoId(MainActivity.aktivJarmu.getAutoId());
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM");
         String[] honapok = datumLista.stream()
                 .map(x -> x.format(dateTimeFormatter))
@@ -77,11 +79,11 @@ public class Stat extends DatabaseHelper {
      * @return Az aktivJarmu egy tankolása átlagosan ennyi kilométer megtételére elég
      */
     public float atlagUtPerTankolas(){
-        return osszesMegtettKm()/getTankolasokSzama();
+        return osszesMegtettKm()/dbh.getTankolasokSzama();
     }
 
     public ArrayList<TankolasokSzamaBontasban> tankolasokSzamaHavonta(){
-        List<LocalDate> datumLista = getDatumokByAutoId(MainActivity.aktivJarmu.getAutoId());
+        List<LocalDate> datumLista = dbh.getDatumokByAutoId(MainActivity.aktivJarmu.getAutoId());
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM");
         List<String> honapokOsszes = datumLista.stream()
                 .map(x -> x.format(dateTimeFormatter))
@@ -99,7 +101,7 @@ public class Stat extends DatabaseHelper {
     }
 
     public ArrayList<TankolasokSzamaBontasban> tankolasokSzamaHetente(){
-        List<LocalDate> datumLista = getDatumokByAutoId(MainActivity.aktivJarmu.getAutoId());
+        List<LocalDate> datumLista = dbh.getDatumokByAutoId(MainActivity.aktivJarmu.getAutoId());
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/");
         List<String> hetekOsszes = datumLista.stream()
                 .sorted(Comparator.reverseOrder())

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.data.models.AutoModel;
 import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.databinding.FragmentJarmuvekBinding;
@@ -41,7 +42,7 @@ public class JarmuvekFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        autoModelList = DatabaseHelper.getInstance(MainActivity.getContext()).getAutok();
+        autoModelList = DbManager.getInstance().getDbHelper().getAutok();
 
         adapter = new JarmuvekAdapter(autoModelList,this.getContext());
         recyclerView.setAdapter(adapter);

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.data.TankolasOsszetett;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class TankolasokFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        dbh=DatabaseHelper.getInstance(MainActivity.getContext());
+        dbh= DbManager.getInstance().getDbHelper();
         View view = getView();
         if(view != null){
             RecyclerView recyclerView = view.findViewById(R.id.recyclerV);

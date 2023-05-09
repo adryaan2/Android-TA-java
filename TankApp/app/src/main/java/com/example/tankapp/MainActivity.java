@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.data.models.AutoModel;
 import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.databinding.ActivityMainBinding;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        dbh =DatabaseHelper.getInstance(getContext());
+        dbh = DbManager.getInstance().getDbHelper();
         if(dbh.getJarmuvekSzama()==0){
             aktivJarmu=null;
         }else {
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //dbh.dbTest();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.DbManager;
 import com.example.tankapp.databinding.FragmentStatsBinding;
 import com.example.tankapp.util.Stat;
 
@@ -51,7 +52,7 @@ public class StatsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         View view = getView();
-        DatabaseHelper dbh = DatabaseHelper.getInstance(MainActivity.getContext());
+        DatabaseHelper dbh = DbManager.getInstance().getDbHelper();
         if(view != null){
             Button aktJarmuBtn = view.findViewById(R.id.aktJarmuBtn);
             aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_stats_to_nav_jarmuvek));
