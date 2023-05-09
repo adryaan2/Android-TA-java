@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +47,7 @@ public class JarmuFelvetelFragment extends Fragment {
 
         binding = FragmentJarmuFelvetelBinding.inflate(inflater, container, false);
 
+        MainActivity.getContext().hideUjtankolasBtn();
         View root = binding.getRoot();
         hozzaadBtn = root.findViewById(R.id.saveVehicleButton);
         rendszEdit = root.findViewById(R.id.numberPlateInputField);
@@ -54,7 +57,7 @@ public class JarmuFelvetelFragment extends Fragment {
 
         hozzaadBtn.setOnClickListener(v->{
             DatabaseHelper dh = DatabaseHelper.getInstance(MainActivity.getContext());
-            String rendsz = rendszEdit.getText().toString();
+            String rendsz = rendszEdit.getText().toString().trim().toUpperCase();
             String megj = megjEdit.getText().toString();
             if(rendsz.length()<7){
                 rendszHibaTxt.setVisibility(View.VISIBLE);
@@ -62,9 +65,23 @@ public class JarmuFelvetelFragment extends Fragment {
             }
             Log.d("uj_rendsz: ",rendsz);
             Log.d("uj_megj: ",megj);
-            dh.addAutok(rendsz, megj);
-            Toast.makeText(getContext(), "Jármű hozzáadva",Toast.LENGTH_SHORT).show();
-            getFragmentManager().popBackStack();
+            try {
+                int autokSzama = dh.getJarmuvekSzama();
+                dh.addAutok(rendsz, megj);
+                /**
+                 * Ha ez az első autó amit felvesznek, állítsuk be erre az aktivJarmu változót
+                 * és ne az autók listájára, hanem a kezőoldalra navigáljunk.
+                 */
+                if(autokSzama==0){
+                    MainActivity.aktivJarmu=dh.getAutok().get(0);
+                    Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_kezdo2);
+                } else Navigation.findNavController(v).navigate(R.id.action_jarmuFelvetelFragment_to_nav_jarmuvek);
+
+                Toast.makeText(getContext(), "Jármű hozzáadva",Toast.LENGTH_SHORT).show();
+            }
+            catch (SQLiteConstraintException e) {
+                Toast.makeText(getContext(), "Ilyen rendszámú jármű már létezik!", Toast.LENGTH_SHORT).show();
+            }
         });
 
         return root;

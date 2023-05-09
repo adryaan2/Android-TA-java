@@ -117,11 +117,7 @@ public class KezdoFragment extends Fragment{
 
             }
         });
-
-
         return root;
-
-
    }
 
     @Override
@@ -165,8 +161,6 @@ public class KezdoFragment extends Fragment{
             DecimalFormat df = new DecimalFormat("#.####");
             atlag.setText(df.format(atlagFogy)+ " l/100km");
             osszes.setText(osszesUt + " km");
-
-
         }
     }
     /**
@@ -205,5 +199,4 @@ public class KezdoFragment extends Fragment{
         barData.setValueTextSize(14.0f);
         return barData;
     }
-
 }

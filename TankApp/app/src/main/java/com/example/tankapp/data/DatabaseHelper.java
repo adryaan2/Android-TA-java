@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.tankapp.MainActivity;
 import com.example.tankapp.data.models.AutoModel;
 import com.example.tankapp.data.models.TankolasModel;
 import com.example.tankapp.data.models.TavolsagModel;
@@ -37,33 +38,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE Autok (autoId INTEGER PRIMARY KEY AUTOINCREMENT, rendszam TEXT, megj TEXT)"); //2db
+        db.execSQL("CREATE TABLE Autok (autoId INTEGER PRIMARY KEY AUTOINCREMENT, rendszam TEXT UNIQUE, megj TEXT)"); //2db
         db.execSQL("CREATE TABLE Valutak (id INTEGER PRIMARY KEY AUTOINCREMENT, valuta TEXT)"); //huf, Usd
         db.execSQL("CREATE TABLE Urmertekek (id INTEGER PRIMARY KEY AUTOINCREMENT, urmertek TEXT)"); //l,gl
         db.execSQL("CREATE TABLE Tavolsagok (id INTEGER PRIMARY KEY AUTOINCREMENT, tavolsag TEXT)"); //km, miles
         db.execSQL("CREATE TABLE Uzemanyagok (uzemanyagId INTEGER PRIMARY KEY AUTOINCREMENT, megnev TEXT)"); //benzin, diesel
         db.execSQL("CREATE TABLE Tankolasok (tankId INTEGER PRIMARY KEY AUTOINCREMENT, datum INTEGER, autoId INTEGER, megtett_tav INTEGER, tavolsagId INTEGER, ar FLOAT, valutaId INTEGER, menny FLOAT, uzemanyagId INTEGER, urmertekId INTEGER, FOREIGN KEY (autoId) REFERENCES Autok(autoId), FOREIGN KEY (tavolsagId) REFERENCES Tavolsagok(id), FOREIGN KEY (valutaId) REFERENCES Valutak(id), FOREIGN KEY (uzemanyagId) REFERENCES Uzemanyagok(uzemanyagId), FOREIGN KEY (urmertekId) REFERENCES Urmertekek(id) )");
 
-        this.db = db;
+        DatabaseHelper.db = db;
+        init();
         feltolt();
     }
 
     private void feltolt(){
         addAutok("ABC-123", "szürke");
         addAutok("DEF-456", "kék");
-
-        addValutak("HUF");
-        addValutak("USD");
-
-        addUrmertekek("liter");
-        addUrmertekek("gallon");
-
-        addTavolsagok("km");
-        addTavolsagok("mf");
-
-        addUzemanyagok("benzin");
-        addUzemanyagok("diesel");
-
 
         addTankolasok(LocalDate.of(2023,4,18).toEpochDay(), 2, 150, 2, 20, 2, 23,1, 1);
         addTankolasok(LocalDate.of(2023,4,2).toEpochDay(), 2, 276, 1, 2000, 1, 18,1, 1);
@@ -75,7 +64,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
         addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
         addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
+    }
 
+    private void init(){
+        addValutak("HUF");
+        addValutak("USD");
+
+        addUrmertekek("liter");
+        addUrmertekek("gallon");
+
+        addTavolsagok("km");
+        addTavolsagok("mf");
+
+        addUzemanyagok("benzin");
+        addUzemanyagok("diesel");
     }
 
     public void dbTest(){
@@ -106,6 +108,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         for(TankolasOsszetett akt : getTankolasokByAutoId(2))
             Log.d("byID", akt.toString());
+
+        Log.d("AUTOK_SZAMA", String.valueOf(getJarmuvekSzama()));
     }
 
 
@@ -119,7 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("rendszam", Rendszam);
         values.put("megj", megj);
-        db.insert("Autok", null, values);
+        db.insertOrThrow("Autok", null, values);
     }
 
     public void addValutak(String Valuta) {
@@ -256,8 +260,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * @return Az aktivJarmu tankolásainak száma.
+     */
     public int getTankolasokSzama(){
-        String sql="SELECT COUNT(tankId) FROM Tankolasok";
+        String sql="SELECT COUNT(*) FROM Tankolasok WHERE autoId="+ MainActivity.aktivJarmu.getAutoId();
         db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         if(cursor.moveToFirst()){
@@ -384,6 +391,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return lista;
+    }
+
+    public int getJarmuvekSzama(){
+        String sql="SELECT COUNT(*) FROM Autok";
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToFirst()){
+            int x = cursor.getInt(0);
+            cursor.close();
+            return x;
+        }else{
+            cursor.close();
+            return -1;
+        }
+    }
+
+    public void kiurit(){
+        db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM Tankolasok");
+        db.execSQL("DELETE FROM Autok");
     }
 
 }

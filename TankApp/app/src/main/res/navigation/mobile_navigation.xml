@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_kezdo_to_nav_jarmuvek"
             app:destination="@id/nav_jarmuvek" />
+        <action
+            android:id="@+id/action_nav_kezdo_to_nav_tankolasFelvetel"
+            app:destination="@id/nav_tankolasFelvetel" />
     </fragment>
 
     <fragment
@@ -33,6 +36,9 @@
         <action
             android:id="@+id/action_nav_tankolasok_to_nav_jarmuvek"
             app:destination="@id/nav_jarmuvek" />
+        <action
+            android:id="@+id/action_nav_tankolasok_to_nav_tankolasFelvetel"
+            app:destination="@id/nav_tankolasFelvetel" />
     </fragment>
 
     <fragment
@@ -55,16 +61,33 @@
         android:name="com.example.tankapp.ui.tankolas_felvetel.TankolasFelvetelFragment"
         android:label="@string/menu_add_fuel"
         tools:layout="@layout/fragment_tankolas_felvetel"
-    />
+    >
+        <action
+            android:id="@+id/action_nav_tankolasFelvetel_to_nav_kezdo"
+            app:destination="@id/nav_kezdo"
+            app:popUpTo="@id/nav_kezdo"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/jarmuFelvetelFragment"
         android:name="com.example.tankapp.ui.jarmu_felvetel.JarmuFelvetelFragment"
         android:label="JarmuFelvetelFragment"
-        tools:layout="@layout/fragment_jarmu_felvetel"/>
+        tools:layout="@layout/fragment_jarmu_felvetel">
+        <action
+            android:id="@+id/action_jarmuFelvetelFragment_to_nav_jarmuvek"
+            app:destination="@id/nav_jarmuvek"
+            app:popUpTo="@id/nav_jarmuvek"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_jarmuFelvetelFragment_to_nav_kezdo2"
+            app:destination="@id/nav_kezdo"
+            app:popUpTo="@id/nav_kezdo"
+            app:popUpToInclusive="true" />
+    </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.tankapp.MainActivity"
-        android:label="fragment_tankolas_felvetel"
-        tools:layout="@layout/fragment_tankolas_felvetel" />
+        android:label="fragment_kezdo"
+        tools:layout="@layout/fragment_kezdo" />
 
 </navigation>

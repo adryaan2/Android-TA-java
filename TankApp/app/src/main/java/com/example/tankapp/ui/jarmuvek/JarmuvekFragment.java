@@ -36,6 +36,7 @@ public class JarmuvekFragment extends Fragment {
                 new ViewModelProvider(this).get(JarmuvekViewModel.class);
 
         binding = FragmentJarmuvekBinding.inflate(inflater, container, false);
+        MainActivity.getContext().hideUjtankolasBtn();
         View root = binding.getRoot();
         recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);

@@ -8,6 +8,8 @@ import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class TankolasFelvetelFragment extends Fragment {
     private FragmentTankolasFelvetelBinding binding;
@@ -45,8 +48,12 @@ public class TankolasFelvetelFragment extends Fragment {
         TankolasFelvetelViewModel tankolasFelvetelViewModel = new ViewModelProvider(this).get(TankolasFelvetelViewModel.class);
 
         binding = FragmentTankolasFelvetelBinding.inflate(inflater, container, false);
-
+        MainActivity.getContext().hideUjtankolasBtn();
         View root = binding.getRoot();
+
+        TextView txt_rendsz = root.findViewById(R.id.carNumPlate);
+        txt_rendsz.setText(MainActivity.aktivJarmu.getRendszam());
+
         btn_date = root.findViewById(R.id.setDateTimeButton);
         btn_mentes = root.findViewById(R.id.saveRefuellingButton);
         /**
@@ -113,6 +120,10 @@ public class TankolasFelvetelFragment extends Fragment {
                  */
                 DatePickerDialog dialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog, dateSetListener,year,month,day);
                 dialog.show();
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                /**
+                 * a jelenlegi napnál későbbi dátumok kiválasztásának "tiltása"
+                 * */
             }
         });
 
@@ -203,7 +214,7 @@ public class TankolasFelvetelFragment extends Fragment {
 
                 if (hozzaadhatoE) {
                     DatabaseHelper.getInstance(MainActivity.getContext()).addTankolasok(date.toEpochDay(), MainActivity.aktivJarmu.getAutoId(), Integer.parseInt(String.valueOf(txt_tavolsag.getText())), (int)tavolsagSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagEgysegar.getText())), (int)valutaSpinner.getSelectedItemId() + 1, Float.parseFloat(String.valueOf(txt_uzemanyagMennyiseg.getText())), (int)uzemanyagSpinner.getSelectedItemId() + 1, (int)urmertekSpinner.getSelectedItemId() + 1);
-                    getFragmentManager().popBackStack();
+                    Navigation.findNavController(view).navigate(R.id.action_nav_tankolasFelvetel_to_nav_kezdo);
                 }
             }
         });

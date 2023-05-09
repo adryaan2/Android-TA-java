@@ -15,6 +15,7 @@
     <string name="menu_add_fuel">Új tankolás</string>
 
     <string name="uj_tankolas_cim">Új tankolás rögzítése</string>
+    <string name="jelenlegi_auto_szoveg">jelű járműhöz</string>
     <string name="datum_cim">Tankolás időpontja:</string>
     <string name="datum_kivalsztas_szoveg">Adja meg a tankolás időpontját</string>
     <string name="datum_kivalsztas_figyelmeztetes">A dátum megadásánál hiba lépett fel!</string>
@@ -74,5 +75,16 @@
     <string name="statisztika_cim">Statisztika</string>
     <string name="heti_opcio">Heti bontás</string>
     <string name="havi_opcio">Havi bontás</string>
+
+    <string name="atlag_fogyasztas_kiiras">Átlagfogyasztás:</string>
+    <string name="havi_tankolasok_szama_atlag">Havonta átlagosan ennyiszer tankolok:</string>
+    <string name="egy_tankolas_mennyire_eleg">Egy tankolás átlagosan ennyire elég:</string>
+    <string name="tankolasok_havi_bontas_title">Tankolások száma havonta</string>
+    <string name="tankolasok_heti_bontas_title">Tankolások száma hetente</string>
+    <string name="no_refueling_yet_hint">Majd itt jelennek meg az utolsó tankolás adatai és néhány statisztika.\nA kiválasztott járműhöz még\nnem tartozik tankolás.\nFelvehet egyet a jobb felső gombbal.</string>
+    <string name="no_refueling_yet_hint_stat">Majd itt jelennek meg\na kiválasztott járműre vonatkozó statisztikák.\nMég nem rögzített tankolást\na kiválasztott járműhöz.\nA Kezdőlap, illetve a Tankolások\noldalakon keresztül vehet fel egyet.</string>
+    <string name="no_refueling_yet_hint_tankolasok">Majd itt jelenik meg a kiválasztott jármű\nösszes tankolásának minden adata.\nMég nem rögzített tankolást\na kiválasztott járműhöz.\nFelvehet egyet a jobb felső gombbal.</string>
+    <string name="no_vehicle_yet_hint">A kezdéshez vegyen fel\negy járművet az adatbankba.\nEzt az alsó sávra koppintva teheti meg.</string>
+    <string name="unsaved_db_hint">A jelenlegi adatbázis nincs mentve, így ha importál egy másikat, jelenlegi adatai elvesznek. Az adatbázis mentéséhez válassza az Exportálás lehetőséget.</string>
 
 </resources>

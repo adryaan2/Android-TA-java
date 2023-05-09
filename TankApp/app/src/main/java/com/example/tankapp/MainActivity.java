@@ -2,6 +2,7 @@ package com.example.tankapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.tankapp.data.models.AutoModel;
@@ -25,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static AutoModel aktivJarmu;
 
-
-
-    static private Button aktJarmuBtn;
-    public static void refreshAktJarmuBtn() {aktJarmuBtn.setText("Jelenlegi jármű: "+aktivJarmu.getRendszam());}
+    private DatabaseHelper dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         instance=this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        deleteDatabase("TankolasKonyvelesek.db");
+        //deleteDatabase("TankolasKonyvelesek.db");
 
 
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -47,22 +45,23 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_kezdo, R.id.nav_jarmuvek, R.id.nav_tankolasok,
+                R.id.nav_kezdo, R.id.nav_tankolasok,
                 R.id.nav_stats, R.id.nav_importExport)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        dbh =DatabaseHelper.getInstance(getContext());
+        if(dbh.getJarmuvekSzama()==0){
+            aktivJarmu=null;
+        }else {
+            aktivJarmu = dbh.getAutok().get(0);
+            //MAJD KIVENNI----------------------------------------------
+            Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
+        }
 
-        aktivJarmu=DatabaseHelper.getInstance(getContext())
-                .getAutok().get(0);
-        //MAJD KIVENNI----------------------------------------------
-        Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
-
-        DatabaseHelper.getInstance(MainActivity.getContext()).dbTest();
-        aktJarmuBtn = findViewById(R.id.aktJarmuBtn);
-        aktJarmuBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_kezdo_to_nav_jarmuvek));
+        //dbh.dbTest();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,5 +75,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void hideUjtankolasBtn(){
+        Button ujTankolasBtn = findViewById(R.id.ujTankolasBtn);
+        ujTankolasBtn.setVisibility(View.GONE);
+    }
+
+    public void showUjtankolasBtn(){
+        Button ujTankolasBtn = findViewById(R.id.ujTankolasBtn);
+        ujTankolasBtn.setVisibility(View.VISIBLE);
     }
 }
