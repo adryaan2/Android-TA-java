@@ -7,6 +7,16 @@
     android:background="@color/black"
     tools:context=".ui.kezdo.KezdoFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/nincsTankTxt"
         android:layout_width="match_parent"
@@ -146,14 +156,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eltelt_ido" />
 
-    <include
-        layout="@layout/bottom_bar_vehicle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/utolsoTankCimTxt"
         android:layout_width="wrap_content"
@@ -212,5 +214,64 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/atlagfogyasztas_text" />
+
+            <TextView
+                android:id="@+id/statisztikaCim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/statisztika_cim"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/utolsoTankCimTxt"
+                app:layout_constraintTop_toBottomOf="@+id/osszesut_text" />
+
+            <TextView
+                android:id="@+id/statisztikaHeti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/heti_opcio"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/statisztikaCim"
+                app:layout_constraintTop_toBottomOf="@+id/statisztikaCim" />
+
+            <TextView
+                android:id="@+id/statisztikaHavi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/havi_opcio"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/statisztikaHeti"
+                app:layout_constraintTop_toTopOf="@+id/statisztikaHeti" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statisztikaHeti" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+            <include
+                android:id="@+id/bottomBar"
+                layout="@layout/bottom_bar_vehicle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
