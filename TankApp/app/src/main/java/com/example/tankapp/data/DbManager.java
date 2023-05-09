@@ -1,5 +1,6 @@
 package com.example.tankapp.data;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.io.File;
@@ -52,6 +53,16 @@ public class DbManager {
 
         //Log.d("ujdb","darabszam: " + dbHelperSingleton.getJarmuvekSzama());
 
+    }
+
+    /**
+     * Bezárja és kitörli a megnyitott adatbázisfájlt.
+     */
+    public void deleteExportedDb(){
+        File aktDb = new File(dbHelperSingleton.db.getPath());
+        dbHelperSingleton.close();
+        SQLiteDatabase.deleteDatabase(aktDb);
+        dbHelperSingleton = new DatabaseHelper();
     }
 
     public void loadDb(String dbNev){

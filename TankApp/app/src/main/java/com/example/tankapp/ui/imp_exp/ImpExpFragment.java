@@ -1,5 +1,6 @@
 package com.example.tankapp.ui.imp_exp;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
+import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.data.DbManager;
 import com.example.tankapp.databinding.FragmentImpExpBinding;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ImpExpFragment extends Fragment {
@@ -58,17 +61,31 @@ public class ImpExpFragment extends Fragment {
     }
 
     private void torlesClick(View v){
-        new AlertDialog.Builder(v.getContext())
-                .setTitle("Törlés")
-                .setMessage("Az összes jármű és tankolás törlődik az adatbankból. Folytatja?")
-                .setNegativeButton("Mégse", null ) //TESZTELD LEEE
-                .setPositiveButton("Megerősít", (dialog, id)-> dbManager.getDbHelper().kiurit())
-                .show();
+        if(Objects.equals(dbManager.currentDbName(), DbManager.DEFAULT_DBNAME)){
+            new AlertDialog.Builder(v.getContext())
+                    .setTitle("Törlés")
+                    .setMessage("Az összes jármű és tankolás törlődik az adatbankból. Folytatja?")
+                    .setNegativeButton("Mégse", null ) //TESZTELD LEEE
+                    .setPositiveButton("Megerősít", (dialog, id)-> dbManager.getDbHelper().kiurit())
+                    .setIcon(android.R.drawable.ic_delete)
+                    .show();
+        }else{
+            new AlertDialog.Builder(v.getContext())
+                    .setTitle("Törli a mentett adatbankot?")
+                    .setMessage("A művelet nem visszavonható.")
+                    .setNegativeButton("Mégse", null ) //TESZTELD LEEE
+                    .setPositiveButton("Törlés", (dialog, id)-> {
+                        dbManager.deleteExportedDb();
+                        refreshUi();
+                    })
+                    .setIcon(android.R.drawable.ic_delete)
+                    .show();
+        }
+
     }
 
     private void exportClick(View v){
-        View inputView = LayoutInflater.from(v.getContext()).inflate(R.layout.dialog_edittext,null);
-        EditText input = inputView.findViewById(R.id.editText);
+
         if(dbManager.getDbHelper().getJarmuvekSzama()==0){
             new AlertDialog.Builder(v.getContext())
                     .setTitle("Nincs mit menteni ebben az adatbázisban")
@@ -76,6 +93,9 @@ public class ImpExpFragment extends Fragment {
                     .show();
             return;
         }
+
+        View inputView = LayoutInflater.from(v.getContext()).inflate(R.layout.dialog_edittext,null);
+        EditText input = inputView.findViewById(R.id.editText);
         new AlertDialog.Builder(v.getContext())
                 .setTitle("Adja meg, milyen néven legyen mentve az adatbank!")
                 .setMessage("Nem tartalmazhat pontot")
@@ -105,7 +125,7 @@ public class ImpExpFragment extends Fragment {
          * a listában legyen levágva róluk a .db végződés
          * a dbToLoad-ba is pont ahogy kiválasztotta, .db nélkül kerüljön a név
          */
-        String dbToLoad = "bbdb"; //ez az amit kiválaszt a listából a felhasználó
+        String dbToLoad = "ce"; //ez az amit kiválaszt a listából a felhasználó
         //ne rakd hozzá a .db végződést
         //dbToLoad+=".db";
         if(Objects.equals(dbManager.currentDbName(), DbManager.DEFAULT_DBNAME)){
@@ -114,6 +134,7 @@ public class ImpExpFragment extends Fragment {
                     .setTitle("Jelenleg betölött adatai elvesznek")
                     .setMessage("Ha később is el szeretné érni adatait, előbb exportálja őket")
                     .setPositiveButton("Folytatás", (dialog, id)->{
+                        dbManager.getDbHelper().kiurit();
                         dbManager.loadDb(finalDbToLoad); // az android studio mondta hogy legyen final
                         refreshUi();
                         MainActivity.aktivJarmu=dbManager.getDbHelper().getAutok().get(0);

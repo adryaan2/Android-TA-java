@@ -33,6 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper() {
         super(MainActivity.getContext(), DEFAULT_DBNAME, null, 1);
+        db = this.getWritableDatabase();
     }
     public DatabaseHelper(String dbName) {
         super(MainActivity.getContext(), dbName, null, 1);
