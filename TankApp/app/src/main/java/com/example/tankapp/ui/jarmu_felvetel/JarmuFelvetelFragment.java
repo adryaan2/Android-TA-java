@@ -1,18 +1,9 @@
 package com.example.tankapp.ui.jarmu_felvetel;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +13,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.data.DbManager;
 import com.example.tankapp.databinding.FragmentJarmuFelvetelBinding;
-import com.example.tankapp.databinding.FragmentTankolasFelvetelBinding;
 
 
 public class JarmuFelvetelFragment extends Fragment {
@@ -64,8 +60,6 @@ public class JarmuFelvetelFragment extends Fragment {
                 rendszHibaTxt.setVisibility(View.VISIBLE);
                 return;
             }
-            Log.d("uj_rendsz: ",rendsz);
-            Log.d("uj_megj: ",megj);
             try {
                 int autokSzama = dh.getJarmuvekSzama();
                 dh.addAutok(rendsz, megj);

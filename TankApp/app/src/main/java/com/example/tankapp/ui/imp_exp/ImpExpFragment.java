@@ -1,7 +1,6 @@
 package com.example.tankapp.ui.imp_exp;
 
 import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +62,10 @@ public class ImpExpFragment extends Fragment {
     }
 
     private void torlesClick(View v){
+        /**
+         * Ha a default=mentetlen adatbázis van megnyitva,
+         * megerősítés után töröljük a tankolásokat és járműveket.
+         */
         if(Objects.equals(dbManager.currentDbName(), DbManager.DEFAULT_DBNAME)){
             new AlertDialog.Builder(v.getContext())
                     .setTitle("Törlés")
@@ -72,6 +75,11 @@ public class ImpExpFragment extends Fragment {
                     .setIcon(android.R.drawable.ic_delete)
                     .show();
         }else{
+            /**
+             * Ha exportált=mentett adatbázis van megnyitva,
+             * megerősítés után töröljük az adatbázisfájlt,
+             * és betöltődik egy üres, mentetlen adatbázis
+             */
             new AlertDialog.Builder(v.getContext())
                     .setTitle("Törli a mentett adatbankot?")
                     .setMessage("A művelet nem visszavonható.")
@@ -87,7 +95,10 @@ public class ImpExpFragment extends Fragment {
     }
 
     private void exportClick(View v){
-
+        /**
+         * Ha nincs jármű az adatbázisban, csak tájékoztatjuk
+         * a felhasználót, hogy nincs mit menteni.
+         */
         if(dbManager.getDbHelper().getJarmuvekSzama()==0){
             new AlertDialog.Builder(v.getContext())
                     .setTitle("Nincs mit menteni ebben az adatbázisban")
@@ -95,7 +106,11 @@ public class ImpExpFragment extends Fragment {
                     .show();
             return;
         }
-
+        /**
+         * Egyéb esetben a felhasználótól bekért néven mentjük el
+         * az adatbázisfájlt. A név pontot nem tartalmazhat,
+         * és nem egyezhet meg a default névvel, ami a "nem mentett" adatbázist jelenti.
+         */
         View inputView = LayoutInflater.from(v.getContext()).inflate(R.layout.dialog_edittext,null);
         EditText input = inputView.findViewById(R.id.editText);
         new AlertDialog.Builder(v.getContext())

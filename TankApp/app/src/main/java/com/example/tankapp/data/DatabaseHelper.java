@@ -1,28 +1,18 @@
 package com.example.tankapp.data;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.data.models.AutoModel;
-import com.example.tankapp.data.models.TankolasModel;
 import com.example.tankapp.data.models.TavolsagModel;
 import com.example.tankapp.data.models.UrmertekModel;
 import com.example.tankapp.data.models.UzemanyagModel;
 import com.example.tankapp.data.models.ValutaModel;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -51,9 +41,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         this.db = db;
         init();
-        feltolt();
+        //feltolt();
     }
 
+    /**
+     * Mockdata feltöltés
+     */
     private void feltolt(){
         addAutok("ABC-123", "szürke");
         addAutok("DEF-456", "kék");
@@ -70,9 +63,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         addTankolasok(LocalDate.of(2022,2,2).toEpochDay(), 1, 220, 2, 50, 2, 10,2, 2);
     }
 
+    /**
+     * A felhasználói használathoz szükséges alapadatok
+     */
     private void init(){
         addValutak("HUF");
         addValutak("USD");
+        addValutak("EUR");
 
         addUrmertekek("liter");
         addUrmertekek("gallon");
@@ -81,7 +78,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         addTavolsagok("mf");
 
         addUzemanyagok("benzin");
-        addUzemanyagok("diesel");
+        addUzemanyagok("dízel");
+        addUzemanyagok("LPG");
+        addUzemanyagok("CNG");
+        addUzemanyagok("etanol");
+        addUzemanyagok("biodízel");
     }
 
     public void dbTest(){
@@ -168,21 +169,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.insert("Tankolasok",null,values);
 
-    }
-
-    public void addTankolasModel(@NonNull TankolasModel tankolasModel){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("datum", tankolasModel.getDatum());
-        contentValues.put("autoId", tankolasModel.getAutoId());
-        contentValues.put("megtett_tav", tankolasModel.getMegtett_tav());
-        contentValues.put("tavolsagId", tankolasModel.getTavolsagId());
-        contentValues.put("valutaId", tankolasModel.getValutaId());
-        contentValues.put("uzemanyagId", tankolasModel.getUzemanyagId());
-        contentValues.put("urmertekId", tankolasModel.getUrmertekId());
-        contentValues.put("ar", tankolasModel.getAr());
-        contentValues.put("menny", tankolasModel.getMenny());
-        db = this.getWritableDatabase();
-        db.insert("Tankolasok", null,contentValues);
     }
 
     public ArrayList<TankolasOsszetett> getOsszesTankolas(){

@@ -17,7 +17,6 @@ import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
 import com.example.tankapp.data.DbManager;
 import com.example.tankapp.data.models.AutoModel;
-import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.databinding.FragmentJarmuvekBinding;
 
 import java.util.List;
