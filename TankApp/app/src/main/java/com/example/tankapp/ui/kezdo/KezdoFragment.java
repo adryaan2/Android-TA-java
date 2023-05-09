@@ -4,9 +4,7 @@ import static com.example.tankapp.MainActivity.aktivJarmu;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 import android.graphics.Color;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +45,7 @@ public class KezdoFragment extends Fragment{
 
     private Stat statistics;
 
+    private TextView statTitle;
     private ArrayList<TankolasokSzamaBontasban> weeklyArrayList;
 
     private ArrayList<TankolasokSzamaBontasban> monthlyArrayList;
@@ -68,6 +67,7 @@ public class KezdoFragment extends Fragment{
         barChart.setBackgroundColor(getResources().getColor(R.color.tankolas_felvetel_doboz));
         barChart.setNoDataText("Válasszon a heti vagy a havi bontás között!");
         barChart.setNoDataTextColor(getResources().getColor(R.color.black2));
+        statTitle= binding.statisztikaCim;
         weeklyChart = root.findViewById(R.id.statisztikaHeti);
         monthlyChart = root.findViewById(R.id.statisztikaHavi);
         weeklyArrayList = new ArrayList<>();
@@ -164,6 +164,10 @@ public class KezdoFragment extends Fragment{
                 TextView cim = view.findViewById(R.id.utolsoTankCimTxt);
                 cim.setVisibility(View.GONE);
                 ujTankolasBtn.setVisibility(View.GONE);
+                barChart.setVisibility(View.GONE);
+                weeklyChart.setVisibility(View.GONE);
+                monthlyChart.setVisibility(View.GONE);
+                statTitle.setVisibility(View.GONE);
 
                 binding.nincsAutoTxtKezdo.setVisibility(View.VISIBLE);
                 aktJarmuBtn.setText("Járművek oldal");
@@ -187,6 +191,10 @@ public class KezdoFragment extends Fragment{
                 atlagfogy.setVisibility(View.GONE);
                 TextView cim = view.findViewById(R.id.utolsoTankCimTxt);
                 cim.setVisibility(View.GONE);
+                barChart.setVisibility(View.GONE);
+                weeklyChart.setVisibility(View.GONE);
+                monthlyChart.setVisibility(View.GONE);
+                statTitle.setVisibility(View.GONE);
 
                 TextView nincsTank = view.findViewById(R.id.nincsTankTxt);
                 nincsTank.setVisibility(View.VISIBLE);
@@ -225,8 +233,6 @@ public class KezdoFragment extends Fragment{
         final ArrayList<String> xVals = new ArrayList<>();
         float counter = 0f;
         for (TankolasokSzamaBontasban x : arrayList){
-            Log.d("t", x.getIdoszak());
-            Log.d("c", x.getTankolasokSzama() + "");
             barEntries.add(new BarEntry(counter,x.getTankolasokSzama()));
             xVals.add(x.getIdoszak());
             counter+=1f;

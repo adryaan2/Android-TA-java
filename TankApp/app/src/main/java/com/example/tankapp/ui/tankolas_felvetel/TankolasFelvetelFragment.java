@@ -1,15 +1,9 @@
 package com.example.tankapp.ui.tankolas_felvetel;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +15,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
 import com.example.tankapp.MainActivity;
 import com.example.tankapp.R;
-import com.example.tankapp.data.DatabaseHelper;
 import com.example.tankapp.data.DbManager;
 import com.example.tankapp.data.models.TavolsagModel;
 import com.example.tankapp.data.models.UrmertekModel;

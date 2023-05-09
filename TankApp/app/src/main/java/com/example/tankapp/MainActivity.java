@@ -1,21 +1,22 @@
 package com.example.tankapp;
+
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.tankapp.data.DbManager;
-import com.example.tankapp.data.models.AutoModel;
-import com.example.tankapp.data.DatabaseHelper;
-import com.example.tankapp.databinding.ActivityMainBinding;
-import com.google.android.material.navigation.NavigationView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tankapp.data.DatabaseHelper;
+import com.example.tankapp.data.DbManager;
+import com.example.tankapp.data.models.AutoModel;
+import com.example.tankapp.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,11 +59,7 @@ public class MainActivity extends AppCompatActivity {
             aktivJarmu=null;
         }else {
             aktivJarmu = dbh.getAutok().get(0);
-            //MAJD KIVENNI----------------------------------------------
-            Log.d("AKTIV_JARMU id",String.valueOf(aktivJarmu.getAutoId()));
         }
-
-        //dbh.dbTest();
     }
 
     @Override

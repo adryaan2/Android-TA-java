@@ -4,9 +4,9 @@ Projekt neve: Tankolás könyvelő
 
 Feladat rövid ismertetése: Tankolások könyvelése, s ebből statisztikák készítése.
 
-Felhasznált programozási nyelv: C# vagy Java
+Felhasznált programozási nyelv: Java
 
-Operációs rendszer: Android 9.0+
+Operációs rendszer: Android 8.0+
 
 Csak álló tájolás
 

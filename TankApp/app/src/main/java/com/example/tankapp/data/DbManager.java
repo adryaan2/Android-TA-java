@@ -1,7 +1,6 @@
 package com.example.tankapp.data;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,11 +9,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Egyke DatabaseHelper példány kérhető el az osztály egy példányától.
+ * A DbManager osztály singleton példányát statikus metódussal kérhetjük el.
+ * Az egész adatbázist érintő műveleteket végez.
+ */
 public class DbManager {
     private static DbManager dbManagerSingleton;
     private DatabaseHelper dbHelperSingleton;
-    private DatabaseHelper seged;
-    private String dbDirectory;
     public static final String DEFAULT_DBNAME = DatabaseHelper.DEFAULT_DBNAME;
 
     private DbManager(){}
@@ -33,14 +35,15 @@ public class DbManager {
         return dbHelperSingleton.getDatabaseName();
     }
 
-    public String dbDirectory(){
-        return dbHelperSingleton.getDbDirectory();
-    }
-
+    /**
+     * A megadott névvel másolja le az aktuálisan megnyitott adatbázisfájlt.
+     * A másolás után a getDbHelper-rel kérhető DatabaseHelper objektum
+     * már ezt az új adatbázist kezeli.
+     * @param dbNev - az új adatbázis neve.
+     */
     public void exportDb(String dbNev){
         File aktDb = new File(dbHelperSingleton.db.getPath());
 
-        Log.d("DB_PATH", dbHelperSingleton.db.getPath());
         File ujDb = new File(aktDb.getParentFile(),dbNev+".db");
         try{
             copyFile(aktDb, ujDb);
@@ -49,10 +52,6 @@ public class DbManager {
         }
         dbHelperSingleton.close();
         dbHelperSingleton = new DatabaseHelper(dbNev+".db");
-
-
-        //Log.d("ujdb","darabszam: " + dbHelperSingleton.getJarmuvekSzama());
-
     }
 
     /**
@@ -65,6 +64,10 @@ public class DbManager {
         dbHelperSingleton = new DatabaseHelper();
     }
 
+    /**
+     * A megadott nevű adatbázist tölti be. Ha nem létezik, létrejön.
+     * @param dbNev - A megnyitandó adatbázis neve ('.db' végződés nélkül)
+     */
     public void loadDb(String dbNev){
         dbHelperSingleton.close();
         dbHelperSingleton = new DatabaseHelper(dbNev+".db");

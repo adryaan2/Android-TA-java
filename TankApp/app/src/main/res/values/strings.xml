@@ -85,7 +85,7 @@
     <string name="no_refueling_yet_hint">Majd itt jelennek meg az utolsó tankolás adatai és néhány statisztika.\nA kiválasztott járműhöz még\nnem tartozik tankolás.\nFelvehet egyet a jobb felső gombbal.</string>
     <string name="no_refueling_yet_hint_stat">Majd itt jelennek meg\na kiválasztott járműre vonatkozó statisztikák.\nMég nem rögzített tankolást\na kiválasztott járműhöz.\nA Kezdőlap, illetve a Tankolások\noldalakon keresztül vehet fel egyet.</string>
     <string name="no_refueling_yet_hint_tankolasok">Majd itt jelenik meg a kiválasztott jármű\nösszes tankolásának minden adata.\nMég nem rögzített tankolást\na kiválasztott járműhöz.\nFelvehet egyet a jobb felső gombbal.</string>
-    <string name="no_vehicle_yet_hint">A kezdéshez vegyen fel\negy járművet az adatbankba.\nEzt az alsó sávra koppintva teheti meg.</string>
+    <string name="no_vehicle_yet_hint">A kezdéshez vegyen fel\negy járművet az adatbankba.\nEzt az alsó sávra koppintva teheti meg.\nKorábban mentett adatbázist pedig az Import/Export oldalon tölthet be.</string>
     <string name="unsaved_db_hint">A jelenlegi adatbázis nincs mentve, így ha importál egy másikat, jelenlegi adatai elvesznek. Az adatbázis mentéséhez válassza az Exportálás lehetőséget.</string>
     <string name="saved_db_hint">Mentett adatbázis van megnyitva:</string>
     <string name="already_exported">Exportálva</string>
