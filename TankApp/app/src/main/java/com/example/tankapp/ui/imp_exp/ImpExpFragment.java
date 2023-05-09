@@ -1,10 +1,12 @@
 package com.example.tankapp.ui.imp_exp;
 
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -120,34 +122,48 @@ public class ImpExpFragment extends Fragment {
 
     private void importClick(View v){
         /**
-         * To-Do: a dbToLoad az legyen amit kiválasztott
-         * a dbManager.dbDirectory() helyen levő .db-re végződő fájlok listájából
-         * a listában legyen levágva róluk a .db végződés
-         * a dbToLoad-ba is pont ahogy kiválasztotta, .db nélkül kerüljön a név
+         * Kilistázza a database mappában levő .db kiterjesztésű fájlokat, kivéve a default adatbázist (TankolasKonyvelesek.db).
+         * A kiválasztottat pedig importálja.
          */
-        String dbToLoad = "ce"; //ez az amit kiválaszt a listából a felhasználó
-        //ne rakd hozzá a .db végződést
-        //dbToLoad+=".db";
-        if(Objects.equals(dbManager.currentDbName(), DbManager.DEFAULT_DBNAME)){
-            String finalDbToLoad = dbToLoad;
-            new AlertDialog.Builder(v.getContext())
-                    .setTitle("Jelenleg betölött adatai elvesznek")
-                    .setMessage("Ha később is el szeretné érni adatait, előbb exportálja őket")
-                    .setPositiveButton("Folytatás", (dialog, id)->{
-                        dbManager.getDbHelper().kiurit();
-                        dbManager.loadDb(finalDbToLoad); // az android studio mondta hogy legyen final
-                        refreshUi();
-                        MainActivity.aktivJarmu=dbManager.getDbHelper().getAutok().get(0);
-                    })
-                    .setNegativeButton("Mégse",null)
-                    .show();
-        }else {
-            dbManager.loadDb(dbToLoad);
-            refreshUi();
-            MainActivity.aktivJarmu=dbManager.getDbHelper().getAutok().get(0);
+
+        File[] files = new File(DbManager.getInstance().getDbHelper().getDbDirectory()).listFiles();
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
+        builderSingle.setTitle("Válassza ki az adatbázis fájlt!");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_singlechoice);
+        for (int i = 0; i < files.length; i++) {
+            String aktElem = files[i].getName();
+            if (!aktElem.equals(DatabaseHelper.DEFAULT_DBNAME) && aktElem.endsWith(".db"))
+                arrayAdapter.add(aktElem.substring(0, aktElem.length() - 3));
         }
 
+        builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
 
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String dbToLoad = arrayAdapter.getItem(which); //ez az amit kiválaszt a listából a felhasználó
+                if(Objects.equals(dbManager.currentDbName(), DbManager.DEFAULT_DBNAME)){
+                    String finalDbToLoad = dbToLoad;
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("Jelenleg betölött adatai elvesznek")
+                            .setMessage("Ha később is el szeretné érni adatait, előbb exportálja őket")
+                            .setPositiveButton("Folytatás", (dialog2, id)->{
+                                dbManager.getDbHelper().kiurit();
+                                dbManager.loadDb(finalDbToLoad); // az android studio mondta hogy legyen final
+                                refreshUi();
+                                MainActivity.aktivJarmu=dbManager.getDbHelper().getAutok().get(0);
+                            })
+                            .setNegativeButton("Mégse",null)
+                            .show();
+                }else {
+                    dbManager.loadDb(dbToLoad);
+                    refreshUi();
+                    MainActivity.aktivJarmu=dbManager.getDbHelper().getAutok().get(0);
+                }
+            }
+        });
+        builderSingle.show();
     }
 
     /**
