@@ -53,6 +53,7 @@ public class ImpExpFragment extends Fragment {
 
         torolBtn.setOnClickListener(v->torlesClick(v));
         expBtn.setOnClickListener(v->exportClick(v));
+        impBtn.setOnClickListener(v->importClick(v));
         refreshUi();
     }
 
@@ -79,7 +80,7 @@ public class ImpExpFragment extends Fragment {
                 .setTitle("Adja meg, milyen néven legyen mentve az adatbank!")
                 .setMessage("Nem tartalmazhat pontot")
                 .setView(inputView)
-                .setNegativeButton("Mégse", (dialog, id) ->dialog.cancel() )
+                .setNegativeButton("Mégse", (dialog, id) ->dialog.dismiss() )
                 .setPositiveButton("Mentés", (dialog, id) ->{
                     String be= String.valueOf(input.getText());
                     if(be.contains(".") || be.length()==0)
@@ -97,15 +98,52 @@ public class ImpExpFragment extends Fragment {
 
     }
 
+    private void importClick(View v){
+        /**
+         * To-Do: a dbToLoad az legyen amit kiválasztott
+         * a dbManager.dbDirectory() helyen levő .db-re végződő fájlok listájából
+         * a listában legyen levágva róluk a .db végződés
+         * a dbToLoad-ba is pont ahogy kiválasztotta, .db nélkül kerüljön a név
+         */
+        String dbToLoad = "bbdb"; //ez az amit kiválaszt a listából a felhasználó
+        //ne rakd hozzá a .db végződést
+        //dbToLoad+=".db";
+        if(Objects.equals(dbManager.currentDbName(), DbManager.DEFAULT_DBNAME)){
+            String finalDbToLoad = dbToLoad;
+            new AlertDialog.Builder(v.getContext())
+                    .setTitle("Jelenleg betölött adatai elvesznek")
+                    .setMessage("Ha később is el szeretné érni adatait, előbb exportálja őket")
+                    .setPositiveButton("Folytatás", (dialog, id)->{
+                        dbManager.loadDb(finalDbToLoad); // az android studio mondta hogy legyen final
+                        refreshUi();
+                        MainActivity.aktivJarmu=dbManager.getDbHelper().getAutok().get(0);
+                    })
+                    .setNegativeButton("Mégse",null)
+                    .show();
+        }else {
+            dbManager.loadDb(dbToLoad);
+            refreshUi();
+            MainActivity.aktivJarmu=dbManager.getDbHelper().getAutok().get(0);
+        }
+
+
+    }
+
     /**
      * felület változásai annak függvényében, hogy mentett adatbázis van-e megnyitva
      */
     private void refreshUi(){
         String aktDb = dbManager.currentDbName();
-        if(Objects.equals(aktDb, DbManager.DEFAULT_DBNAME))
+        if(Objects.equals(aktDb, DbManager.DEFAULT_DBNAME)) {
             aktDbTxt.setText(R.string.unsaved_db_hint);
-        else
-            aktDbTxt.setText(getString(R.string.saved_db_hint)+" "+aktDb.substring(0,aktDb.indexOf('.')));
+            expBtn.setText(R.string.make_export);
+            expBtn.setEnabled(true);
+        }
+        else {
+            aktDbTxt.setText(getString(R.string.saved_db_hint) + " " + aktDb.substring(0, aktDb.indexOf('.')));
+            expBtn.setText(R.string.already_exported);
+            expBtn.setEnabled(false);
+        }
     }
 
     @Override

@@ -416,32 +416,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM Autok");
     }
 
-    public void exportDb(String dbNev){
-        File aktDb = new File(getReadableDatabase().getPath());
-
-        Log.d("DB_PATH",getReadableDatabase().getPath());
-        File ujDb = new File(aktDb.getParentFile(),dbNev+".db");
-        try{
-            copyFile(aktDb, ujDb);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public static void copyFile(File src, File dst) throws IOException {
-        try (InputStream in = new FileInputStream(src)) {
-            try (OutputStream out = new FileOutputStream(dst)) {
-                // Transfer bytes from in to out
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len);
-                }
-            }
-        }
-    }
-
     public String getDatabaseName(){return this.getReadableDatabase().getPath().substring(db.getPath().lastIndexOf('/')+1);}
 
     public String getDbDirectory(){

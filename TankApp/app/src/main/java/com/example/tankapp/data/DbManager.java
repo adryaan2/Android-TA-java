@@ -54,6 +54,11 @@ public class DbManager {
 
     }
 
+    public void loadDb(String dbNev){
+        dbHelperSingleton.close();
+        dbHelperSingleton = new DatabaseHelper(dbNev+".db");
+    }
+
     private void copyFile(File src, File dst) throws IOException {
         try (InputStream in = new FileInputStream(src)) {
             try (OutputStream out = new FileOutputStream(dst)) {
