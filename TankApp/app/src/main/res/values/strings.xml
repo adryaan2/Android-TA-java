@@ -73,6 +73,10 @@
     <string name="atlag_fogyasztas_text">l/km</string>
     <string name="osszes_megtett_ut_text">Km</string>
 
+    <string name="statisztika_cim">Statisztika</string>
+    <string name="heti_opcio">Heti bontás</string>
+    <string name="havi_opcio">Havi bontás</string>
+
     <string name="atlag_fogyasztas_kiiras">Átlagfogyasztás:</string>
     <string name="havi_tankolasok_szama_atlag">Havonta átlagosan ennyiszer tankolok:</string>
     <string name="egy_tankolas_mennyire_eleg">Egy tankolás átlagosan ennyire elég:</string>
